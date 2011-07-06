@@ -1,0 +1,666 @@
+
+
+/* Login/Logout Modal */
+#simplemodal-overlay {background-color:#333;}
+ 
+a.modal-close,
+a.modal-close:link,
+a.modal-close:active,
+a.modal-close:visited {text-decoration:none; z-index:500; font-weight:bolder; font: 22px 'Trebuchet MS', Verdana, Arial; position:absolute; right:10px; top:2px; color:#fff;}
+a.modal-close:hover {color:#ccc;}
+/* End Login/Logout Modal */
+
+
+
+/* #### START CustomDialog (Modal Windows for Login and Logout)*/
+#WebGearz_login, 
+#WebGearz_logout {display:none;font-size: 12px;position:relative; background:#fff; border:2px solid #336699;}
+#WebGearz_login {height:280px;}
+#WebGearz_logout {height:140px;}
+#ckDialog {border:2px solid #336699;}
+
+.customDialog {font: 16px/22px 'Trebuchet MS', Verdana, Arial; text-align:left; }
+.customDialog .header {height:30px; line-height:30px; width:100%; margin-bottom: 15px; background: url(img/header.gif) repeat-x; color:#fff; font-weight:bold;}
+.customDialog .header span {margin-left:10px;}
+.customDialog .text {display:block;min-height: 15px;margin: 0 0 15px 10px;text-align: left; font-weight: bold; color:#999; }
+
+.customDialog label {display:block;width:100%;font-weight:bold;color:#666; float:left;margin:0 0 5px 10px;clear:both;}
+.customDialog input {display:block;float:left;padding: 3px 0 3px 5px; margin: 0 0 15px 10px; font-size: 16px; color: #666; height:24px; width:350px; border: 1px solid #06F;}
+.customDialog .idleField {border: 2px solid #ccc;}
+.customDialog .focusField {border: 2px solid #06F;}
+.customDialog .warningField {border: 2px solid #F33;}
+
+.customDialog .buttons {line-height:26px; width:350px; float:left; padding:5px 0 0 7px; margin: 0 0 0 10px;} 
+.customDialog button {float:right; margin-left: 10px; width:70px; height:26px; color:#666; font-weight:bold; text-align:center; background:url(img/button.gif) repeat-x; border:1px solid #bbb; cursor:pointer;}
+/*this gets rid of the ugly focus outline in FF and crappy IE*/
+:focus {outline:none;}
+::-moz-focus-inner {border:0;}
+  
+
+.customDialog form {background:none;border:0;padding:0;}
+.customDialog fieldset {background:none;display:block;margin:5px 10px 0px 0;border:0;padding:0;}
+/* #### END CustomDialog */
+
+
+
+
+/* #### START WebGearz_panel */
+* {margin:0;padding:0;}
+#WebGearz_panel {font-size:12px; margin:0; padding:0; display:block; position:relative; z-index:99; top:-60px; height:50px; border-bottom:1px solid #333; background-image: url(img/panel_bg.jpg); width:100%; font-size:12px; line-height:15px;font-family:Verdana, Arial, Helvetica, sans-serif; color:#000; text-align:left;}
+#WebGearz_panel_wrap {width:900px; margin: 0 auto; display:none; padding:0px 10px 0 10px;}
+#WebGearz_panel .WebGearz_logo {margin:0; float:left; display:block;}
+#WebGearz_panel .WebGearz_panel_links {margin:0; float:right; display:block;}
+#panel_help, #panel_about, #panel_logout {margin-left: 0px;}
+  
+#WebGearz_panel strong {font-weight:bold;color:#333;}
+#WebGearz_panel em {font-style:italic}
+#WebGearz_panel select {position:absolute;margin:-3px 0 0 4px;}
+#WebGearz_panel option {color:#06C;padding:1px 3px;}
+#WebGearz_panel .small {font-size:80%}
+#WebGearz_panel img {border:0;}
+#WebGearz_panel a,#WebGearz_panel a:visited {font-weight:bold;border:0;text-decoration:none;}
+#WebGearz_panel a:hover {font-weight:bold;color:#06C;text-decoration:underline;border:0;}
+#WebGearz_panel h1 {padding:0; margin:3px 0 0 20px; letter-spacing:.05em; font-family:Verdana, Arial, Helvetica, sans-serif;}
+#WebGearz_panel h2 {padding:20px 0 5px 0;line-height:1.5em;letter-spacing:.05em;font-family:Verdana, Arial, Helvetica, sans-serif;}
+#WebGearz_panel p{font-size:14pz; line-height:22px;color:#333;padding:10px 0;}
+
+/* These are the panel drop-down areas */
+#WebGearz_files, #WebGearz_help, #WebGearz_about {display:none;position:absolute;top:51px;width:100%;z-index:1000;} 
+ 
+.WebGearz_dropDown {display:block; width:864px; min-height:250px; margin:0 auto; background:#ffffff; border:3px solid #336699; border-bottom:20px solid #336699; border-top: none;}
+.WebGearz_dropDown h1 {color:#7c7b7b;font-size:22px;border-bottom:0px solid #7c7b7b;}
+.WebGearz_dropDown h2 {color:#999;font-size:18px;font-weight:bold;padding:0 0 2px 0;margin:10px 0 3px 0;border-bottom:1px solid #7c7b7b;}
+.WebGearz_dropDown ul {margin-left:20px;}
+.WebGearz_dropDown li {margin-left:10px;}
+
+.WebGearz_dropDown_container{width:90%; margin:0 auto; padding:8px 0 10px 0;}
+.WebGearz_dropDown_left{float:left;width:49%;}
+.WebGearz_dropDown_right{float:right;width:49%;}
+.WebGearz_dropDown_padding {padding:0 20px;}
+/* #### END WebGearz_panel */
+
+
+/* #### START inline editing areas (Editable Regions on Pages)*/
+.editactive {
+	border:1px dashed #92C1D3;
+	width:100%; /* setting width:100%; displays the outline's width like block again */
+	display: -moz-inline-stack; /* this should fix the display:inline-block; problem with FF2.0 and lower */
+	display:inline-block; /* display:inline-block; is needed so that editable elements and their children are outlined!! */
+	zoom: 1; /* zoom:1; and display:inline; should fix the display:inline-block; problem in IE7 and lower */
+	*display:inline;
+} 
+.edithover {border:1px solid #92C1D3;background:#d4edfa;}
+.edithoverActive {border:2px solid #92C1D3;}
+
+/* WebGearz_EditMask is shown while content is fetched from the server... after the user clicks the edit icon */
+.WebGearz_EditMask {background:#A3DBF0 url(img/ajax-loader.gif) no-repeat center;display:block;position:absolute;z-index:91;}
+/* WebGearz_EditMask_Full is what is shown while data is fetched from the server for the :full editing interface */
+.WebGearz_EditMask_Full {background:#A3DBF0;display:block;position:absolute;z-index:91;}
+
+/* WebGearz_Click_to_Edit is the edit icon and WebGearz_Save_Cancel contains the Save and Cancel icons */
+.WebGearz_Click_to_Edit, 
+.WebGearz_Save_Cancel {cursor:pointer; border:none; position:absolute; margin:-45px 0 0 -55px; color:#D02B2B; font-weight:bold; z-index:50; font-size:12px; font-family:Verdana, Arial, Helvetica, sans-serif;}
+
+.WebGearz_Click_to_Edit img {position:relative; top:2px; z-index:99;}
+.WebGearz_Save_Cancel img {position:relative;top:2px;z-index:99; margin-left:5px;}
+.WebGearz_Save_Cancel span {position:relative; top:-2px; z-index:99;}
+.WebGearz_Save_Cancel div {display:inline;}
+/* #### END inline editing areas */
+
+
+
+
+/**
+// +----------------------------------------------------------------------+
+// | fsLib see config.php file for more details 										      |
+// +----------------------------------------------------------------------+
+ *
+ * fslib ** came about as a nice drop and go solution that is ordered by name and can be used
+ * anywhere with very little config required at all.
+ * The upload files uses the SWFUpload http://www.swfupload.org/ code to make life easy which
+ * is also under the MIT License (included in the directory for swfupload
+ *
+**/
+
+
+/* #### START CustomDialog for File System */
+#fslibDialog {height: 170px; display:none;font-size: 12px;position:relative; background:#fff; border:2px solid #336699;}
+.fslibDialog {font: 16px/22px 'Trebuchet MS', Verdana, Arial; text-align:left;}
+
+.fslibDialog .header {height:30px; line-height:30px; width:100%; margin-bottom: 15px; background: url(_fslib/res/header.gif) repeat-x; color:#fff; font-weight:bold;}
+.fslibDialog .header span {margin-left:10px;}
+
+.fslibDialog .text {display:block;min-height: 15px;margin: 0 10px 15px 10px;text-align: left; font-weight: bold; color:#999;}
+.fslibDialog .inputName {display:block;float:left;padding: 3px 0 0 5px; margin: 0 0 15px 10px; font-size: 16px; color: #666; height:24px; width:350px; border: 1px solid #06F;}
+
+.fslibDialog .buttons {line-height:26px; width:350px; float:left; padding:5px 0 0 7px; margin: 0 0 0 10px;} 
+.fslibDialog button {float:right; margin-left: 10px; width:70px; height:26px; color:#666; font-weight:bold; text-align:center; background:url(_fslib/res/button.gif) repeat-x; border:1px solid #bbb; cursor:pointer;}
+/*this gets rid of the ugly focus outline in FF and crappy IE*/
+:focus {outline:none;}
+::-moz-focus-inner {border:0;}
+/* #### END CustomDialog */
+
+
+/* #### START File System (Drop-Down areas of WebGearz File Manager)*/
+#fileSystem {background:#ffffff;position:relative;}
+#filePanel {background:#ffffff;padding:5px 5px 0 5px;height:20px;}  /*drop-down file manager header panel -- contains 'createDirectory'and 'fileUpload' links */
+.fileSystemWrap {min-height:200px;padding-top:10px;}
+
+#fileSystem a#createDirectory,
+#fileSystem a#fileUpload { font-size:14px; font-weight:bold; color:#999; }
+#fileSystem a#createDirectory:hover,
+#fileSystem a#createDirectory:active,
+#fileSystem a#fileUpload:hover,
+#fileSystem a#fileUpload:active { font-size:14px; font-weight:bold; color:#39F; text-decoration:none; }
+
+#fileSystem #dir-files {width:100%;background:#fff;}
+#fileSystem #dir-files th{padding:2px 3px;color:#fff;background:#39F;}  /*Just below file manager header panel*/
+#fileSystem #dir-files td{padding:1px;}  /* table cells for file system file list */
+#fileSystem ul{list-style-type:none;margin:0;padding:0;}
+#fileSystem ul ul{list-style-type:none;margin:0;padding:0;min-height:20px;display:block;}
+#fileSystem #dir-files li{list-style-type:none;height:20px;margin:0;clear:both;padding:3px 0 1px 26px;font-size:100%;position:relative;background:#fff;}
+#fileSystem #dir-folder li img{top:3px;left:3px;}
+#fileSystem #dir-files li img{position:absolute;left:3px;}
+#fileSystem th {text-align:left;}
+#fileSystem .size {text-align:right;}
+#fileSystem th .size {text-align:center;}
+#fileSystem .options {text-align:left;}
+#fileSystem th .options {text-align:center;}
+#fileSystem .modTime {text-align:center;}
+#fileSystem #dir-files tr.stripe{background:#ffffff;} /* This creates a colored strip every other filesystem item */
+#fileSystem #dir-files tr.hover{background:#6CF;}  /* File manager hover strip */
+#fileSystem a {border:0;outline:0;color:#000;text-decoration:none;font-weight:bold;}
+#fileSystem a img {border:0;outline:0;}
+#filePanel a {color:#fff;}
+#fileSystem :focus {outline:0;}
+#fileSystem .dir-clear {clear:both;}
+
+#fileSystem .pathDisplay {display:block;margin-left:22px; clear:both;font-size:11px;color:#666;}  /* File system file path */
+#fileSystem .none{display:none;}
+
+#dirCreate, #uploadFile {position:absolute;top:34px;left:0;width:100%;height:0px;background:#fcfcfc;color:#000;}  /*upload file and create directory background*/
+#fileSystem .inner {padding:20px;}
+#fileSystem form, #flashTarget {margin:15px;color:#000;}
+#fileSystem fieldset {border:1px solid #000;background:#ecebeb;}
+#fileSystem legend {border:1px solid #000;margin-left:13px;padding:2px 5px;color:#000;}
+#fileSystem label, #responseDir {font-weight:bold;}
+#cancelDir,#cancelFile {float:right;cursor:pointer;}
+/* #### END File System */
+
+/*Start swfUpload*/
+#fileSystem .likeParent{font:inherit;color:inherit;text-decoration:inherit;}
+#fileSystem  .flash {padding:12px 25px 20px 20px;color:#F2FBFF;}
+#fileSystem a.likeParent, #fileSystem a.likeParent:link, #fileSystem a.likeParent:active, #fileSystem a.likeParent:visited, #fileSystem a.likeParent:hover{font:inherit;color:#000000;text-decoration:none;}
+#fileSystem .progressWrapper{width:auto;overflow:hidden;float:left;position:relative;}  /*This is the content wrapper for the upload files area*/
+#fileSystem .progressContainer{margin:5px;padding:4px;border:solid 1px #E8E8E8;background-color:#F7F7F7;overflow:hidden;width:auto;}
+#fileSystem .red /* Error */{border:solid 1px #B50000;background-color:#FFEBEB;}
+#fileSystem .green /* Current */{border:solid 1px #DDF0DD;background-color:#EBFFEB;}
+#fileSystem .blue /* Complete */{border:solid 1px #CEE2F2;background-color:#F0F5FF;}
+#fileSystem .progressName{font-size:12pt;font-weight:bold;color:#5f6060;width:100%;height:18px;text-align:left;white-space:nowrap;overflow:hidden;}  /*file upload text*/
+#fileSystem .progressBarInProgress,.progressBarComplete,.progressBarError{font-size:0;width:0;height:5px;background-color:#47c047;margin-top:2px;}  /*file upload progress bar*/
+#fileSystem .progressBarComplete{width:100%;background-color:green;visibility:hidden;}
+#fileSystem .progressBarError{width:100%;background-color:red;visibility:hidden;}
+#fileSystem .progressBarStatus{margin-top:2px;width:auto;font-size:9pt;font-family:Verdana;text-align:left;white-space:nowrap;color:#92C1D3;}
+#fileSystem a.progressCancel, #fileSystem a.progressCancel:link, #fileSystem a.progressCancel:active, #fileSystem a.progressCancel:visited, #fileSystem a.progressCancel:hover{float:right;font-size:0;display:block;height:16px;width:16px;background-image:url(_fslib/res/cancel.png);background-repeat:no-repeat;position:relative;}
+/*END swfUpload*/
+
+
+
+
+
+
+
+/* ------------------------------------------------------------------------
+	This you can edit.
+------------------------------------------------------------------------- */
+
+	div.light_rounded .pp_top .pp_left { background: url(images/prettyPhoto/light_rounded/sprite.png) -88px -53px no-repeat; } /* Top left corner */
+	div.light_rounded .pp_top .pp_middle { background: #fff; } /* Top pattern/color */
+	div.light_rounded .pp_top .pp_right { background: url(images/prettyPhoto/light_rounded/sprite.png) -110px -53px no-repeat; } /* Top right corner */
+	
+	div.light_rounded .pp_content .ppt { color: #000; }
+	div.light_rounded .pp_content_container .pp_left,
+	div.light_rounded .pp_content_container .pp_right { background: #fff; }
+	div.light_rounded .pp_content { background-color: #fff; } /* Content background */
+	div.light_rounded .pp_next:hover { background: url(images/prettyPhoto/light_rounded/btnNext.png) center right  no-repeat; cursor: pointer; } /* Next button */
+	div.light_rounded .pp_previous:hover { background: url(images/prettyPhoto/light_rounded/btnPrevious.png) center left no-repeat; cursor: pointer; } /* Previous button */
+	div.light_rounded .pp_expand { background: url(images/prettyPhoto/light_rounded/sprite.png) -31px -26px no-repeat; cursor: pointer; } /* Expand button */
+	div.light_rounded .pp_expand:hover { background: url(images/prettyPhoto/light_rounded/sprite.png) -31px -47px no-repeat; cursor: pointer; } /* Expand button hover */
+	div.light_rounded .pp_contract { background: url(images/prettyPhoto/light_rounded/sprite.png) 0 -26px no-repeat; cursor: pointer; } /* Contract button */
+	div.light_rounded .pp_contract:hover { background: url(images/prettyPhoto/light_rounded/sprite.png) 0 -47px no-repeat; cursor: pointer; } /* Contract button hover */
+	div.light_rounded .pp_close { width: 75px; height: 22px; background: url(images/prettyPhoto/light_rounded/sprite.png) -1px -1px no-repeat; cursor: pointer; } /* Close button */
+	div.light_rounded #pp_full_res .pp_inline { color: #000; } 
+	div.light_rounded .pp_gallery a.pp_arrow_previous,
+	div.light_rounded .pp_gallery a.pp_arrow_next { margin-top: 12px !important; }
+	div.light_rounded .pp_nav .pp_play { background: url(images/prettyPhoto/light_rounded/sprite.png) -1px -100px no-repeat; height: 15px; width: 14px; }
+	div.light_rounded .pp_nav .pp_pause { background: url(images/prettyPhoto/light_rounded/sprite.png) -24px -100px no-repeat; height: 15px; width: 14px; }
+
+	div.light_rounded .pp_arrow_previous { background: url(images/prettyPhoto/light_rounded/sprite.png) 0 -71px no-repeat; } /* The previous arrow in the bottom nav */
+		div.light_rounded .pp_arrow_previous.disabled { background-position: 0 -87px; cursor: default; }
+	div.light_rounded .pp_arrow_next { background: url(images/prettyPhoto/light_rounded/sprite.png) -22px -71px no-repeat; } /* The next arrow in the bottom nav */
+		div.light_rounded .pp_arrow_next.disabled { background-position: -22px -87px; cursor: default; }
+
+	div.light_rounded .pp_bottom .pp_left { background: url(images/prettyPhoto/light_rounded/sprite.png) -88px -80px no-repeat; } /* Bottom left corner */
+	div.light_rounded .pp_bottom .pp_middle { background: #fff; } /* Bottom pattern/color */
+	div.light_rounded .pp_bottom .pp_right { background: url(images/prettyPhoto/light_rounded/sprite.png) -110px -80px no-repeat; } /* Bottom right corner */
+
+	div.light_rounded .pp_loaderIcon { background: url(images/prettyPhoto/light_rounded/loader.gif) center center no-repeat; } /* Loader icon */
+	
+	/* ----------------------------------
+		Dark Rounded Theme
+	----------------------------------- */
+	
+	div.dark_rounded .pp_top .pp_left { background: url(images/prettyPhoto/dark_rounded/sprite.png) -88px -53px no-repeat; } /* Top left corner */
+	div.dark_rounded .pp_top .pp_middle { background: url(images/prettyPhoto/dark_rounded/contentPattern.png) top left repeat; } /* Top pattern/color */
+	div.dark_rounded .pp_top .pp_right { background: url(images/prettyPhoto/dark_rounded/sprite.png) -110px -53px no-repeat; } /* Top right corner */
+	
+	div.dark_rounded .pp_content_container .pp_left { background: url(images/prettyPhoto/dark_rounded/contentPattern.png) top left repeat-y; } /* Left Content background */
+	div.dark_rounded .pp_content_container .pp_right { background: url(images/prettyPhoto/dark_rounded/contentPattern.png) top right repeat-y; } /* Right Content background */
+	div.dark_rounded .pp_content { background: url(images/prettyPhoto/dark_rounded/contentPattern.png) top left repeat; } /* Content background */
+	div.dark_rounded .pp_next:hover { background: url(images/prettyPhoto/dark_rounded/btnNext.png) center right  no-repeat; cursor: pointer; } /* Next button */
+	div.dark_rounded .pp_previous:hover { background: url(images/prettyPhoto/dark_rounded/btnPrevious.png) center left no-repeat; cursor: pointer; } /* Previous button */
+	div.dark_rounded .pp_expand { background: url(images/prettyPhoto/dark_rounded/sprite.png) -31px -26px no-repeat; cursor: pointer; } /* Expand button */
+	div.dark_rounded .pp_expand:hover { background: url(images/prettyPhoto/dark_rounded/sprite.png) -31px -47px no-repeat; cursor: pointer; } /* Expand button hover */
+	div.dark_rounded .pp_contract { background: url(images/prettyPhoto/dark_rounded/sprite.png) 0 -26px no-repeat; cursor: pointer; } /* Contract button */
+	div.dark_rounded .pp_contract:hover { background: url(images/prettyPhoto/dark_rounded/sprite.png) 0 -47px no-repeat; cursor: pointer; } /* Contract button hover */
+	div.dark_rounded .pp_close { width: 75px; height: 22px; background: url(images/prettyPhoto/dark_rounded/sprite.png) -1px -1px no-repeat; cursor: pointer; } /* Close button */
+	div.dark_rounded .currentTextHolder { color: #c4c4c4; }
+	div.dark_rounded .pp_description { color: #fff; }
+	div.dark_rounded #pp_full_res .pp_inline { color: #fff; }
+	div.dark_rounded .pp_gallery a.pp_arrow_previous,
+	div.dark_rounded .pp_gallery a.pp_arrow_next { margin-top: 12px !important; }
+	div.dark_rounded .pp_nav .pp_play { background: url(images/prettyPhoto/dark_rounded/sprite.png) -1px -100px no-repeat; height: 15px; width: 14px; }
+	div.dark_rounded .pp_nav .pp_pause { background: url(images/prettyPhoto/dark_rounded/sprite.png) -24px -100px no-repeat; height: 15px; width: 14px; }
+
+	div.dark_rounded .pp_arrow_previous { background: url(images/prettyPhoto/dark_rounded/sprite.png) 0 -71px no-repeat; } /* The previous arrow in the bottom nav */
+		div.dark_rounded .pp_arrow_previous.disabled { background-position: 0 -87px; cursor: default; }
+	div.dark_rounded .pp_arrow_next { background: url(images/prettyPhoto/dark_rounded/sprite.png) -22px -71px no-repeat; } /* The next arrow in the bottom nav */
+		div.dark_rounded .pp_arrow_next.disabled { background-position: -22px -87px; cursor: default; }
+
+	div.dark_rounded .pp_bottom .pp_left { background: url(images/prettyPhoto/dark_rounded/sprite.png) -88px -80px no-repeat; } /* Bottom left corner */
+	div.dark_rounded .pp_bottom .pp_middle { background: url(images/prettyPhoto/dark_rounded/contentPattern.png) top left repeat; } /* Bottom pattern/color */
+	div.dark_rounded .pp_bottom .pp_right { background: url(images/prettyPhoto/dark_rounded/sprite.png) -110px -80px no-repeat; } /* Bottom right corner */
+
+	div.dark_rounded .pp_loaderIcon { background: url(images/prettyPhoto/dark_rounded/loader.gif) center center no-repeat; } /* Loader icon */
+	
+	
+	/* ----------------------------------
+		Dark Square Theme
+	----------------------------------- */
+	
+	div.dark_square .pp_left ,
+	div.dark_square .pp_middle,
+	div.dark_square .pp_right,
+	div.dark_square .pp_content { background: url(images/prettyPhoto/dark_square/contentPattern.png) top left repeat; }
+	div.dark_square .currentTextHolder { color: #c4c4c4; }
+	div.dark_square .pp_description { color: #fff; }
+	div.dark_square .pp_loaderIcon { background: url(images/prettyPhoto/dark_rounded/loader.gif) center center no-repeat; } /* Loader icon */
+	
+	div.dark_square .pp_content_container .pp_left { background: url(images/prettyPhoto/dark_rounded/contentPattern.png) top left repeat-y; } /* Left Content background */
+	div.dark_square .pp_content_container .pp_right { background: url(images/prettyPhoto/dark_rounded/contentPattern.png) top right repeat-y; } /* Right Content background */
+	div.dark_square .pp_expand { background: url(images/prettyPhoto/dark_square/sprite.png) -31px -26px no-repeat; cursor: pointer; } /* Expand button */
+	div.dark_square .pp_expand:hover { background: url(images/prettyPhoto/dark_square/sprite.png) -31px -47px no-repeat; cursor: pointer; } /* Expand button hover */
+	div.dark_square .pp_contract { background: url(images/prettyPhoto/dark_square/sprite.png) 0 -26px no-repeat; cursor: pointer; } /* Contract button */
+	div.dark_square .pp_contract:hover { background: url(images/prettyPhoto/dark_square/sprite.png) 0 -47px no-repeat; cursor: pointer; } /* Contract button hover */
+	div.dark_square .pp_close { width: 75px; height: 22px; background: url(images/prettyPhoto/dark_square/sprite.png) -1px -1px no-repeat; cursor: pointer; } /* Close button */
+	div.dark_square #pp_full_res .pp_inline { color: #fff; }
+	div.dark_square .pp_gallery a.pp_arrow_previous,
+	div.dark_square .pp_gallery a.pp_arrow_next { margin-top: 12px !important; }
+	div.dark_square .pp_nav .pp_play { background: url(images/prettyPhoto/dark_square/sprite.png) -1px -100px no-repeat; height: 15px; width: 14px; }
+	div.dark_square .pp_nav .pp_pause { background: url(images/prettyPhoto/dark_square/sprite.png) -24px -100px no-repeat; height: 15px; width: 14px; }
+	
+	div.dark_square .pp_arrow_previous { background: url(images/prettyPhoto/dark_square/sprite.png) 0 -71px no-repeat; } /* The previous arrow in the bottom nav */
+		div.dark_square .pp_arrow_previous.disabled { background-position: 0 -87px; cursor: default; }
+	div.dark_square .pp_arrow_next { background: url(images/prettyPhoto/dark_square/sprite.png) -22px -71px no-repeat; } /* The next arrow in the bottom nav */
+		div.dark_square .pp_arrow_next.disabled { background-position: -22px -87px; cursor: default; }
+	
+	div.dark_square .pp_next:hover { background: url(images/prettyPhoto/dark_square/btnNext.png) center right  no-repeat; cursor: pointer; } /* Next button */
+	div.dark_square .pp_previous:hover { background: url(images/prettyPhoto/dark_square/btnPrevious.png) center left no-repeat; cursor: pointer; } /* Previous button */
+
+
+	/* ----------------------------------
+		Light Square Theme
+	----------------------------------- */
+	
+	div.light_square .pp_left ,
+	div.light_square .pp_middle,
+	div.light_square .pp_right,
+	div.light_square .pp_content { background: #fff; }
+	
+	div.light_square .pp_content .ppt { color: #000; }
+	div.light_square .pp_expand { background: url(images/prettyPhoto/light_square/sprite.png) -31px -26px no-repeat; cursor: pointer; } /* Expand button */
+	div.light_square .pp_expand:hover { background: url(images/prettyPhoto/light_square/sprite.png) -31px -47px no-repeat; cursor: pointer; } /* Expand button hover */
+	div.light_square .pp_contract { background: url(images/prettyPhoto/light_square/sprite.png) 0 -26px no-repeat; cursor: pointer; } /* Contract button */
+	div.light_square .pp_contract:hover { background: url(images/prettyPhoto/light_square/sprite.png) 0 -47px no-repeat; cursor: pointer; } /* Contract button hover */
+	div.light_square .pp_close { width: 75px; height: 22px; background: url(images/prettyPhoto/light_square/sprite.png) -1px -1px no-repeat; cursor: pointer; } /* Close button */
+	div.light_square #pp_full_res .pp_inline { color: #000; }
+	div.light_square .pp_gallery a.pp_arrow_previous,
+	div.light_square .pp_gallery a.pp_arrow_next { margin-top: 12px !important; }
+	div.light_square .pp_nav .pp_play { background: url(images/prettyPhoto/light_square/sprite.png) -1px -100px no-repeat; height: 15px; width: 14px; }
+	div.light_square .pp_nav .pp_pause { background: url(images/prettyPhoto/light_square/sprite.png) -24px -100px no-repeat; height: 15px; width: 14px; }
+	
+	div.light_square .pp_arrow_previous { background: url(images/prettyPhoto/light_square/sprite.png) 0 -71px no-repeat; } /* The previous arrow in the bottom nav */
+		div.light_square .pp_arrow_previous.disabled { background-position: 0 -87px; cursor: default; }
+	div.light_square .pp_arrow_next { background: url(images/prettyPhoto/light_square/sprite.png) -22px -71px no-repeat; } /* The next arrow in the bottom nav */
+		div.light_square .pp_arrow_next.disabled { background-position: -22px -87px; cursor: default; }
+	
+	div.light_square .pp_next:hover { background: url(images/prettyPhoto/light_square/btnNext.png) center right  no-repeat; cursor: pointer; } /* Next button */
+	div.light_square .pp_previous:hover { background: url(images/prettyPhoto/light_square/btnPrevious.png) center left no-repeat; cursor: pointer; } /* Previous button */
+
+
+	/* ----------------------------------
+		Facebook style Theme
+	----------------------------------- */
+	
+	div.facebook .pp_top .pp_left { background: url(images/prettyPhoto/facebook/sprite.png) -88px -53px no-repeat; } /* Top left corner */
+	div.facebook .pp_top .pp_middle { background: url(images/prettyPhoto/facebook/contentPatternTop.png) top left repeat-x; } /* Top pattern/color */
+	div.facebook .pp_top .pp_right { background: url(images/prettyPhoto/facebook/sprite.png) -110px -53px no-repeat; } /* Top right corner */
+	
+	div.facebook .pp_content .ppt { color: #000; }
+	div.facebook .pp_content_container .pp_left { background: url(images/prettyPhoto/facebook/contentPatternLeft.png) top left repeat-y; } /* Content background */
+	div.facebook .pp_content_container .pp_right { background: url(images/prettyPhoto/facebook/contentPatternRight.png) top right repeat-y; } /* Content background */
+	div.facebook .pp_content { background: #fff; } /* Content background */
+	div.facebook .pp_expand { background: url(images/prettyPhoto/facebook/sprite.png) -31px -26px no-repeat; cursor: pointer; } /* Expand button */
+	div.facebook .pp_expand:hover { background: url(images/prettyPhoto/facebook/sprite.png) -31px -47px no-repeat; cursor: pointer; } /* Expand button hover */
+	div.facebook .pp_contract { background: url(images/prettyPhoto/facebook/sprite.png) 0 -26px no-repeat; cursor: pointer; } /* Contract button */
+	div.facebook .pp_contract:hover { background: url(images/prettyPhoto/facebook/sprite.png) 0 -47px no-repeat; cursor: pointer; } /* Contract button hover */
+	div.facebook .pp_close { width: 22px; height: 22px; background: url(images/prettyPhoto/facebook/sprite.png) -1px -1px no-repeat; cursor: pointer; } /* Close button */
+	div.facebook #pp_full_res .pp_inline { color: #000; } 
+	div.facebook .pp_loaderIcon { background: url(images/prettyPhoto/facebook/loader.gif) center center no-repeat; } /* Loader icon */
+	
+	div.facebook .pp_arrow_previous { background: url(images/prettyPhoto/facebook/sprite.png) 0 -71px no-repeat; height: 22px; margin-top: 0; width: 22px; } /* The previous arrow in the bottom nav */
+		div.facebook .pp_arrow_previous.disabled { background-position: 0 -96px; cursor: default; }
+	div.facebook .pp_arrow_next { background: url(images/prettyPhoto/facebook/sprite.png) -32px -71px no-repeat; height: 22px; margin-top: 0; width: 22px; } /* The next arrow in the bottom nav */
+		div.facebook .pp_arrow_next.disabled { background-position: -32px -96px; cursor: default; }
+	div.facebook .pp_nav { margin-top: 0; }
+	div.facebook .pp_nav p { font-size: 15px; padding: 0 3px 0 4px; }
+	div.facebook .pp_nav .pp_play { background: url(images/prettyPhoto/facebook/sprite.png) -1px -123px no-repeat; height: 22px; width: 22px; }
+	div.facebook .pp_nav .pp_pause { background: url(images/prettyPhoto/facebook/sprite.png) -32px -123px no-repeat; height: 22px; width: 22px; }
+	
+	div.facebook .pp_next:hover { background: url(images/prettyPhoto/facebook/btnNext.png) center right no-repeat; cursor: pointer; } /* Next button */
+	div.facebook .pp_previous:hover { background: url(images/prettyPhoto/facebook/btnPrevious.png) center left no-repeat; cursor: pointer; } /* Previous button */
+	
+	div.facebook .pp_bottom .pp_left { background: url(images/prettyPhoto/facebook/sprite.png) -88px -80px no-repeat; } /* Bottom left corner */
+	div.facebook .pp_bottom .pp_middle { background: url(images/prettyPhoto/facebook/contentPatternBottom.png) top left repeat-x; } /* Bottom pattern/color */
+	div.facebook .pp_bottom .pp_right { background: url(images/prettyPhoto/facebook/sprite.png) -110px -80px no-repeat; } /* Bottom right corner */
+
+
+/* ------------------------------------------------------------------------
+	DO NOT CHANGE
+------------------------------------------------------------------------- */
+
+	div.pp_pic_holder a:focus { outline:none; }
+
+	div.pp_overlay {
+		background: #000;
+		display: none;
+		left: 0;
+		position: absolute;
+		top: 0;
+		width: 100%;
+		z-index: 9500;
+	}
+	
+	div.pp_pic_holder {
+		display: none;
+		position: absolute;
+		width: 100px;
+		z-index: 10000;
+	}
+		
+		.pp_top {
+			height: 20px;
+			position: relative;
+		}
+			* html .pp_top { padding: 0 20px; }
+		
+			.pp_top .pp_left {
+				height: 20px;
+				left: 0;
+				position: absolute;
+				width: 20px;
+			}
+			.pp_top .pp_middle {
+				height: 20px;
+				left: 20px;
+				position: absolute;
+				right: 20px;
+			}
+				* html .pp_top .pp_middle {
+					left: 0;
+					position: static;
+				}
+			
+			.pp_top .pp_right {
+				height: 20px;
+				left: auto;
+				position: absolute;
+				right: 0;
+				top: 0;
+				width: 20px;
+			}
+		
+		.pp_content { height: 40px; }
+		
+		.pp_fade { display: none; }
+		
+		.pp_content_container {
+			position: relative;
+			text-align: left;
+			width: 100%;
+		}
+		
+			.pp_content_container .pp_left { padding-left: 20px; }
+			.pp_content_container .pp_right { padding-right: 20px; }
+		
+			.pp_content_container .pp_details {
+				float: left;
+				margin: 10px 0 2px 0;
+			}
+				.pp_description {
+					display: none;
+					margin: 0 0 5px 0;
+				}
+				
+				.pp_nav {
+					clear: left;
+					float: left;
+					margin: 3px 0 0 0;
+				}
+				
+					.pp_nav p {
+						float: left;
+						margin: 2px 4px;
+					}
+					
+					.pp_nav .pp_play,
+					.pp_nav .pp_pause {
+						float: left;
+						margin-right: 4px;
+						text-indent: -10000px;
+					}
+				
+					a.pp_arrow_previous,
+					a.pp_arrow_next {
+						display: block;
+						float: left;
+						height: 15px;
+						margin-top: 3px;
+						overflow: hidden;
+						text-indent: -10000px;
+						width: 14px;
+					}
+		
+		.pp_hoverContainer {
+			position: absolute;
+			top: 0;
+			width: 100%;
+			z-index: 2000;
+		}
+		
+		.pp_gallery {
+			left: 50%;
+			margin-top: -50px;
+			position: absolute;
+			z-index: 10000;
+		}
+			
+			.pp_gallery ul {
+				float: left;
+				height: 35px;
+				margin: 0 0 0 5px;
+				overflow: hidden;
+				padding: 0;
+				position: relative;
+			}
+			
+			.pp_gallery ul a {
+				border: 1px #000 solid;
+				border: 1px rgba(0,0,0,0.5) solid;
+				display: block;
+				float: left;
+				height: 33px;
+				overflow: hidden;
+			}
+			
+			.pp_gallery ul a:hover,
+			.pp_gallery li.selected a { border-color: #fff; }
+			
+			.pp_gallery ul a img { border: 0; }
+			
+			.pp_gallery li {
+				display: block;
+				float: left;
+				margin: 0 5px 0 0;
+			}
+			
+			.pp_gallery li.default a {
+				background: url(images/prettyPhoto/facebook/default_thumbnail.gif) 0 0 no-repeat;
+				display: block;
+				height: 33px;
+				width: 50px;
+			}
+			
+			.pp_gallery li.default a img { display: none; }
+			
+			.pp_gallery .pp_arrow_previous,
+			.pp_gallery .pp_arrow_next {
+				margin-top: 7px !important;
+			}
+		
+		a.pp_next {
+			background: url(images/prettyPhoto/light_rounded/btnNext.png) 10000px 10000px no-repeat;
+			display: block;
+			float: right;
+			height: 100%;
+			text-indent: -10000px;
+			width: 49%;
+		}
+			
+		a.pp_previous {
+			background: url(images/prettyPhoto/light_rounded/btnNext.png) 10000px 10000px no-repeat;
+			display: block;
+			float: left;
+			height: 100%;
+			text-indent: -10000px;
+			width: 49%;
+		}
+		
+		a.pp_expand,
+		a.pp_contract {
+			cursor: pointer;
+			display: none;
+			height: 20px;	
+			position: absolute;
+			right: 30px;
+			text-indent: -10000px;
+			top: 10px;
+			width: 20px;
+			z-index: 20000;
+		}
+			
+		a.pp_close {
+			display: block;
+			float: right;
+			line-height:22px;
+			text-indent: -10000px;
+		}
+		
+		.pp_bottom {
+			height: 20px;
+			position: relative;
+		}
+			* html .pp_bottom { padding: 0 20px; }
+			
+			.pp_bottom .pp_left {
+				height: 20px;
+				left: 0;
+				position: absolute;
+				width: 20px;
+			}
+			.pp_bottom .pp_middle {
+				height: 20px;
+				left: 20px;
+				position: absolute;
+				right: 20px;
+			}
+				* html .pp_bottom .pp_middle {
+					left: 0;
+					position: static;
+				}
+				
+			.pp_bottom .pp_right {
+				height: 20px;
+				left: auto;
+				position: absolute;
+				right: 0;
+				top: 0;
+				width: 20px;
+			}
+		
+		.pp_loaderIcon {
+			display: block;
+			height: 24px;
+			left: 50%;
+			margin: -12px 0 0 -12px;
+			position: absolute;
+			top: 50%;
+			width: 24px;
+		}
+		
+		#pp_full_res {
+			line-height: 1 !important;
+		}
+		
+			#pp_full_res .pp_inline {
+				text-align: left;
+			}
+			
+				#pp_full_res .pp_inline p { margin: 0 0 15px 0; }
+	
+		div.ppt {
+			color: #fff;
+			display: none;
+			font-size: 17px;
+			margin: 0 0 5px 15px;
+			z-index: 9999;
+		}
+
+/* ------------------------------------------------------------------------
+	Miscellaneous
+------------------------------------------------------------------------- */
+
+	.clearfix:after {
+	    content: "."; 
+	    display: block; 
+	    height: 0; 
+	    clear: both; 
+	    visibility: hidden;
+	}
+
+	.clearfix {display: inline-block;}
+
+	/* Hides from IE-mac \*/
+	* html .clearfix {height: 1%;}
+	.clearfix {display: block;}
+	/* End hide from IE-mac */

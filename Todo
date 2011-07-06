@@ -1,0 +1,27 @@
+1. Spring security integration - automatic login after registration problem
+2. Social integration 
+3. Filing Service
+4. how to create subdomains
+
+http://stackoverflow.com/questions/3170796/help-regarding-setting-up-pseudo-fake-subdomains-on-apache
+5. jquery integration
+6. refactoring services. 1. Remove mongotemplate , repository out of services.. have a genericDao and abstract Dao... 
+7. do we need an abstract model?
+
+---------
+Use case
+1. Any url which is in servlet context
+2. Is user logged in? 
+3.a. Yes --> redirect user to dashboard page
+3.b. No --> redirect user to login page
+     3.b.1. User tries to login 
+     3.b.1a Was login successful?
+      Yes --> Redirect to dashboard page
+      No --> Go to authentication failure url
+---------
+F
+4. write a custom logout filter
+5.  
+
+Testing aloha integration
+1. See if edit mode button adds and deletes the editablediv class from the divs

@@ -1,0 +1,5 @@
+To start the application
+1. Start the mongo daemen
+2. Create a folder in userhome directory called wgprops. Copy the common.properties file into that folder.
+
+3. Start tc Server

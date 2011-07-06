@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:sec="http://www.springframework.org/schema/security"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.0.xsd">
+     <import resource="mongo-config.xml"/>                  
+    <!-- All spring security stuff goes in here -->
+    <!--sec:global-method-security secured-annotations="enabled"></sec:global-method-security-->
+    <sec:http use-expressions="true">
+    	<sec:intercept-url pattern="/cms/**" access="isAuthenticated()" />
+		<sec:intercept-url pattern="/login" access="permitAll" filters="none" />
+		<sec:intercept-url pattern="/" access="permitAll" filters="none"/>
+		<sec:intercept-url pattern="/resources/**" access="permitAll" filters="none"/>
+		<sec:intercept-url pattern="/cms/createUser" access="permitAll" filters="none"/>
+		<sec:intercept-url pattern="/cms/getDivContent/**" access="permitAll" filters="none"/>
+		<sec:intercept-url pattern="/cms/getTemplate/**" access="permitAll" filters="none"/>
+		<!--sec:custom-filter ref="logoutFilter" position="LOGOUT_FILTER" /-->
+		<sec:form-login login-page="/login" 
+		  authentication-success-handler-ref="authenticationSuccessHandler"
+		  authentication-failure-handler-ref="authenticationFailureHandler" />
+		<sec:logout logout-success-url="/" />
+    </sec:http>	
+    
+    <!-- Define AccessDesisionManager as UnanimousBased -->
+	<bean id="accessDecisionManager" class="org.springframework.security.access.vote.UnanimousBased">
+		<property name="decisionVoters">
+			<list>
+				<bean class="org.springframework.security.access.vote.AuthenticatedVoter" />
+			</list>
+		</property>
+	</bean>
+
+    <sec:authentication-manager alias="authenticationManager">
+		<sec:authentication-provider ref="dbAuthenticationProvider" />
+		<sec:authentication-provider>
+			<sec:user-service>
+				<sec:user name="britney@abc.com" password="britney" authorities=""/>
+			</sec:user-service>
+		</sec:authentication-provider>
+	</sec:authentication-manager>
+	<bean id="authenticationSuccessHandler" class="com.webgearz.security.util.WGAuthenticationSuccessHandler">
+		<constructor-arg value="/cms/user_dashboard" />
+	</bean>
+	<bean id="authenticationFailureHandler" class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler">
+		<property name="defaultFailureUrl" value="/login?login_error=1" />
+	</bean>
+	<bean id="dbAuthenticationProvider" class="com.webgearz.security.util.DbAuthenticationProvider">
+		<property name="userDetailsService" ref="userDetailsService" />
+	</bean>
+	<bean id="userDetailsService" class="com.webgearz.security.util.MongoUserDetailsService">
+		<property name="securityService" ref="securityService" />
+	</bean>
+	<bean id="securityService" class="com.webgearz.security.service.impl.SecurityServiceImpl">
+		<property name="mongoTemplate" ref="mongoTemplate" />
+	</bean>
+	<!--bean id="logoutFilter" class="org.springframework.security.web.authentication.logout.LogoutFilter">
+		<constructor-arg index="0" value="/" />
+		<constructor-arg index="1">
+			<list>
+				<bean
+					class="org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler" />
+				<bean class="com.ccm.security.CcmLogoutHandler" />
+				<ref bean="rememberMeServices"/>
+				
+			</list>
+		</constructor-arg>
+	</bean-->
+	<bean id="authenticationFilter"
+		class="org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter">
+		<property name="authenticationManager" ref="authenticationManager" />
+		<property name="filterProcessesUrl" value="/j_spring_security_check" />
+	</bean>
+</beans>

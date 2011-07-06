@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:p="http://www.springframework.org/schema/p" 
+    xmlns:mongo="http://www.springframework.org/schema/data/mongo"
+    xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	   		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	   		http://www.springframework.org/schema/context
+	   		http://www.springframework.org/schema/context/spring-context-3.0.xsd
+   			http://www.springframework.org/schema/data/mongo
+    		http://www.springframework.org/schema/data/mongo/spring-mongo-1.0.xsd">
+	<!-- Activates various annotations to be detected in bean classes -->
+	<context:annotation-config />
+	
+	<!-- Scans the classpath for annotated components that will be auto-registered as Spring beans.
+	 For example @Controller and @Service. Make sure to set the correct base-package-->
+	<context:component-scan base-package="com.webgearz.tb.services" />
+  	
+  	<mongo:repositories base-package="com.webgearz.tb.mongo.repositories" />
+  
+	<!-- Default bean name is 'mongo' -->
+	<mongo:mongo host="localhost" port="27017"/>
+	
+	<mongo:mapping-converter id="converter" />
+	
+	<!-- Offers convenience methods and automatic mapping between MongoDB JSON documents and your domain classes. -->
+  	<bean id="mongoTemplate" class="org.springframework.data.document.mongodb.MongoTemplate">
+  			<constructor-arg ref="mongo"/>
+		    <constructor-arg name="databaseName" value="vvcc"/>
+		    <constructor-arg name="defaultCollectionName" value="user"/>
+		    <constructor-arg ref="converter" />
+  	</bean>
+
+</beans>

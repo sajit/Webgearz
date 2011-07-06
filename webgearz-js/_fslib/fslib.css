@@ -1,0 +1,82 @@
+/**
+// +----------------------------------------------------------------------+
+// | fsLib see config.php file for more details 										      |
+// +----------------------------------------------------------------------+
+ *
+ * fslib ** came about as a nice drop and go solution that is ordered by name and can be used
+ * anywhere with very little config required at all.
+ * The upload files uses the SWFUpload http://www.swfupload.org/ code to make life easy which
+ * is also under the MIT License (included in the directory for swfupload
+ *
+**/
+
+/* #### START File System */
+#fileSystem {border:2px solid #1C6A9E;width:750px;background:#F5FBFE;position:relative;}
+#filePanel {background:#1C6A9E;color:#fff;padding:5px 5px 0 5px;height:29px;overflow:hidden;}
+.fileSystemWrap {min-height:450px;}
+*html .fileSystemWrap {height:450px;}
+#fileSystem #dir-files {width:100%;background:#fff;}
+#fileSystem #dir-files th{padding:2px 3px;color:#fff;background:#6197BB;}
+#fileSystem #dir-files td{padding:1px;}
+#fileSystem ul{list-style-type:none;margin:0;padding:0;}
+#fileSystem ul ul{list-style-type:none;margin:0;padding:0;min-height:20px;display:block;}
+#fileSystem #dir-files li{list-style-type:none;height:20px;margin:0;clear:both;padding:3px 0 1px 26px;font-size:100%;position:relative;background:#fff;}
+#fileSystem #dir-folder li img{top:3px;left:3px;}
+#fileSystem #dir-files li img{position:absolute;left:3px;}
+#fileSystem th {text-align:left;}
+#fileSystem .size {text-align:right;}
+#fileSystem th .size {text-align:center;}
+#fileSystem .options {text-align:left;}
+#fileSystem th .options {text-align:center;}
+#fileSystem .modTime {text-align:center;}
+#fileSystem #dir-files tr.stripe{background:#E4EDF4;}
+#fileSystem #dir-files tr.hover{background:#6197BB;color:#fff;}
+#fileSystem a {border:0;outline:0;color:#000;text-decoration:none;font-weight:bold;}
+#fileSystem a img {border:0;outline:0;}
+#filePanel a {color:#fff;}
+#fileSystem :focus {outline:0;}
+#fileSystem .dir-clear {clear:both;}
+
+#fileSystem .pathDisplay {display:block;font-size:11px;font-widght:normal;}
+#fileSystem .none{display:none;}
+
+#dirCreate, #uploadFile {position:absolute;top:34px;left:0;width:100%;height:0px;background:#6197BB;}
+#fileSystem .inner {padding:20px;}
+#fileSystem form, #flashTarget {margin:15px;color:#E4EDF4;}
+#fileSystem fieldset {border:1px solid #E4EDF4;}
+#fileSystem legend {border:1px solid #E4EDF4;margin-left:13px;padding:2px 5px;color:#E4EDF4;}
+#fileSystem label, #responseDir {font-weight:bold;}
+#cancelDir,#cancelFile {float:right;cursor:pointer;}
+/* #### END File System */
+
+/*Start swfUpload*/
+#fileSystem button, #fileSystem input{ border-width: 1px; padding: 2px 3px;}
+#fileSystem #btnholder {position:relative;}
+#fileSystem #btnCancel {position:absolute;left:120px;top:122px;width:155px;}
+#fileSystem #btnSubmit { margin: 0 0 0 155px ; }
+
+#fileSystem .likeParent{font:inherit;color:inherit;text-decoration:inherit;}
+#fileSystem  .flash {padding:12px 25px 20px 20px;color:#E4EDF4;}
+#fileSystem a.likeParent, #fileSystem a.likeParent:link, #fileSystem a.likeParent:active, #fileSystem a.likeParent:visited, #fileSystem a.likeParent:hover{font:inherit;color:#000000;text-decoration:none;}
+#fileSystem .progressWrapper{width:50%;overflow:hidden;float:left;position:relative;}
+#fileSystem .progressContainer{margin:5px;padding:4px;border:solid 1px #E8E8E8;background-color:#F7F7F7;overflow:hidden;width:300px;}
+#fileSystem .red /* Error */{border:solid 1px #B50000;background-color:#FFEBEB;}
+#fileSystem .green /* Current */{border:solid 1px #DDF0DD;background-color:#EBFFEB;}
+#fileSystem .blue /* Complete */{border:solid 1px #CEE2F2;background-color:#F0F5FF;}
+#fileSystem .progressName{font-size:8pt;font-weight:bold;color:#1C6A9E;width:100%;height:14px;text-align:left;white-space:nowrap;overflow:hidden;}
+#fileSystem .progressBarInProgress,.progressBarComplete,.progressBarError{font-size:0;width:0;height:2px;background-color:#0D820D;margin-top:2px;}
+#fileSystem .progressBarComplete{width:100%;background-color:green;visibility:hidden;}
+#fileSystem .progressBarError{width:100%;background-color:red;visibility:hidden;}
+#fileSystem .progressBarStatus{margin-top:2px;width:315px;font-size:7pt;font-family:Verdana;text-align:left;white-space:nowrap;color:#1C6A9E;}
+#fileSystem a.progressCancel, #fileSystem a.progressCancel:link, #fileSystem a.progressCancel:active, #fileSystem a.progressCancel:visited, #fileSystem a.progressCancel:hover{margin-left:285px;font-size:0;display:block;height:16px;width:16px;background-image:url(res/cancel.png);background-repeat:no-repeat;position:absolute;}
+/*END swfUpload*/
+
+/* #### START CustomDialog for File System */
+#fslibDialog {display:none;font-size: 1.1em;}
+.fslibDialog {position: relative;width: 300px;padding-bottom: 12px;background-image: url(res/dialog_body.gif);background-repeat: no-repeat;background-position: 0 100%;font-family: Arial, sans-serif;text-align: center;}
+.fslibDialog h1{position: relative;top: -10px;margin: 0;border-bottom: 1px solid #001932;padding: 5px 8px;font-size: 120%;background:none;background-image: url(res/dialog_heading.gif);background-repeat: no-repeat;color: #FFFFFF;text-align: left;height:auto;left:0px;}
+.fslibDialog .text{display:block;min-height: 35px;margin: 0 0 15px 0;padding-right: 8px;padding-left: 50px;background-image: url(res/dialog_choice.gif);background-repeat: no-repeat;background-position: 8px 3px;text-align: left;}
+.fslibDialog .inputName {display:none; margin:-20px 0 15px 50px;}
+.fslibDialog button {margin: 0 5px;border: 3px double #FFFFFF;border-right-color: #7F7F7F;border-bottom-color: #7F7F7F;padding: 0 5px;background-color: #BBBCBC;background-image: url(res/dialog_button.gif);background-repeat: repeat-x;}
+*html .customDialog .text, *html .fslibDialog .text {height: 35px;} /* ie6 hack */
+/* #### END CustomDialog */
