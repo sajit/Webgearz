@@ -17,16 +17,8 @@
 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
-	<!-- <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource"> 
-		<property name="basename" value="WEB-INF.i18n.mp"> </property> </bean> -->
-	<beans:bean id="alohamessageSource"
-		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
-		<beans:property name="basenames">
-			<beans:list>
-				<beans:value>classpath:resources/aloha/i18n/</beans:value>
-			</beans:list>
-		</beans:property>
-	</beans:bean>
+	
+		
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
