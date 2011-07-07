@@ -80,7 +80,7 @@ public class TemplateController {
 		UserDomain userDomain = userDomainService.findUserDomainById(domainId);
 		Assert.notNull(template,"Could not find template in database!");
 		Assert.notNull(userDomain,"Could not find user domain");
-		ModelAndView mav = templateFactory.getTemplate(template.getTemplateName(), "t1_home");
+		ModelAndView mav = templateFactory.getTemplate(template.getTemplateName(), "index");
 		mav.getModel().put("domainId", userDomain.getId());
 		return mav;
 	}
