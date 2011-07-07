@@ -7,10 +7,10 @@
 <title>Aloha Editor - The HTML5 Editor Benchmark</title>
 	<meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/aloha/aloha.js"></script>
-<%--     <script type="text/javascript" src="${pageContext.request.contextPath}/resources/aloha/plugins/com.gentics.aloha.plugins.Format/plugin.js"></script> --%>
-<%--     <script type="text/javascript" src="${pageContext.request.contextPath}/resources/aloha/plugins/com.gentics.aloha.plugins.Table/plugin.js"></script> --%>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/resources/aloha/plugins/com.gentics.aloha.plugins.Format/plugin.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/resources/aloha/plugins/com.gentics.aloha.plugins.Table/plugin.js"></script>
 
-<%--     <script type="text/javascript" src="${pageContext.request.contextPath}/resources/aloha/plugins/com.gentics.aloha.plugins.List/plugin.js"></script> --%>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/resources/aloha/plugins/com.gentics.aloha.plugins.List/plugin.js"></script>
 	<script type="text/javascript">
 		
 GENTICS.Aloha.settings = {

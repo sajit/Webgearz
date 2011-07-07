@@ -3,6 +3,7 @@ package com.webgearz.tb.controllers;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
@@ -28,15 +29,27 @@ public class StaticPageController implements ServletContextAware{
 	
 	@RequestMapping(method=RequestMethod.GET,value="/resources/aloha/i18n/{language}.dict")
 	@ResponseBody
-	public byte[] getDictFile(@PathVariable("language")final String language,HttpServletRequest request) throws IOException{
-		
+	public byte[] getDictFile(@PathVariable("language")final String language) throws IOException{
+		String relativeFilepath = "resources/aloha/i18n/"+language+".dict";
 		log.info("Hits the Controller");
+		return doGetFile(language,relativeFilepath);
+		
+	}
+	@RequestMapping(method=RequestMethod.GET,value="/resources/aloha/plugins/com.gentics.aloha.plugins.{pluginName}/i18n/{language}.dict")
+	@ResponseBody
+	public byte[] getPluginDictFile(@PathVariable("language")final String language,@PathVariable("pluginName")final String pluginName) throws IOException{
+		log.info("Hits the plugin Controller endpoint" );
+		String relativeFilepath = "resources/aloha/plugins/com.gentics.aloha.plugins."+pluginName+"/i18n/"+language+".dict";
+		return doGetFile(language,relativeFilepath);
+	}
+	
+	private byte[] doGetFile(String language,String relativeFilepath) throws IOException{
 		if(language==null)
 			throw new RuntimeException("Cannot have empty language");
 		if(!supportedLanguages.contains(language))
 			throw new RuntimeException("Unsupported language");
 	
-		String relativeFilepath = "resources/aloha/i18n/"+language+".dict";
+		
 		
 		
 		URL url = context.getResource(relativeFilepath);
