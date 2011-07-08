@@ -1,16 +1,5 @@
 $(document).ready(function() {
-//	GENTICS.Aloha.settings = {
-//			"i18n": {"current": "en"},
-//			"ribbon": false,
-//			"plugins": { 
-//				"com.gentics.aloha.plugins.GCN": { 
-//					"enabled": false 
-//				},
-//			 	"com.gentics.aloha.plugins.Format": { 
-//					config : [ 'b', 'i','u','del','sub','sup', 'p', 'title', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'pre', 'removeFormat']
-//				} 
-//		 	}
-//		};
+
 	getDivData('data_home_one');
 	getDivData('data_home_two');
     var editFlag = false;
@@ -20,9 +9,13 @@ $(document).ready(function() {
 		alert("Going to " + newMode + " mode");
 		editFlag = prepareModeChange(editFlag);
 		if(editFlag){
-			alert("Editflag == " + editFlag);
-			//$('.editablediv').aloha();
-		}		
+			//alert("Editflag == " + editFlag);
+			$('.editablediv').aloha();
+		}
+		else{
+			//Im not happy with this..but mahalo call doesnt work in current version of aloha 0/9/3..once that works I may not need this
+			window.top.location = "/tb/cms/getTemplate/"+templateId+"/"+domainId;
+		}
 	});
 	
 //	$('#saveEditedStuff').click(function(){

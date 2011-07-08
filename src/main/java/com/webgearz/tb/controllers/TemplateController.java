@@ -82,6 +82,7 @@ public class TemplateController {
 		Assert.notNull(userDomain,"Could not find user domain");
 		ModelAndView mav = templateFactory.getTemplate(template.getTemplateName(), "index");
 		mav.getModel().put("domainId", userDomain.getId());
+		mav.getModel().put("templateId", templateId);
 		return mav;
 	}
 	@Autowired

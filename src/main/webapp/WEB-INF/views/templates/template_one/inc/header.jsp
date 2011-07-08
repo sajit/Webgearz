@@ -19,7 +19,15 @@
 		   },
 		   'base' : "${pageContext.request.contextPath}/resources/aloha/",
 		   'readonly' : true,
-		   'ribbon' : false
+		   'ribbon' : false,
+		   "plugins": { 
+			"com.gentics.aloha.plugins.GCN": { 
+				"enabled": false 
+			},
+		 	"com.gentics.aloha.plugins.Format": { 
+				config : [ 'b', 'i','u','del','sub','sup', 'p', 'title', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'pre', 'removeFormat']
+			}
+		   }
 		 };
 
    </script>

@@ -5,6 +5,7 @@
 <body>
 <script type="text/javascript">
 	var domainId = "${domainId}";
+	var templateId = "${templateId}";
 </script>
 <jsp:include page="/WEB-INF/views/templates/template_one/inc/header.jsp"></jsp:include>
 
