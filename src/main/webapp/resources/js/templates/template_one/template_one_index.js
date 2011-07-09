@@ -18,18 +18,30 @@ $(document).ready(function() {
 		}
 	});
 	
-//	$('#saveEditedStuff').click(function(){
-//		//var editableList = GENETICS.Aloha.editables;
-//		alert(GENTICS.Aloha.getEditableById("data_home_one"));
-//		$.each(GENTICS.Aloha.editables,function (index,editable) {
-//			// and get their clean and valid html5 content, and remember it to fake saving 
-//			var content="";
-//			content = content + "Editable ID: " + editable.getId() +"\nHTML code: " + editable.getContents() + "\n\n";
-//			alert(content);
-//		});
-//
-//		
-//	});
+	$('#saveEditedStuff').click(function(){
+	
+		
+		$.each(GENTICS.Aloha.editables,function (index,editable) {
+			// and get their clean and valid html5 content, and remember it to fake saving 
+			var content="";
+			var divId = editable.getId();
+			var divContent = editable.getContents();
+			content = content + "Editable ID: " + divId +"\nHTML code: " + divContent + "\n\n";
+			var url = '/tb/cms/storeDivContent'; ///cms/storeDivContent
+			$.ajax({
+				  type: 'POST',
+				  url: url,
+				  data: {'domainId' : domainId,'divId': divId,'divContents' : divContent},
+				  success: function(data){
+					  alert(data.msg);
+				  },
+				  dataType: 'json'
+				});
+			alert(content);
+		});
+
+		
+	});
 });
 //Make an ajax call to backend to get divContent
 var getDivData = function(divId){

@@ -7,6 +7,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -45,22 +46,29 @@ public class DivController {
 	}
 	//FIXME the security logic should be in a separate class
 	@RequestMapping(value="/cms/storeDivContent",method = RequestMethod.POST)
-	public ModelAndView storeDivContent(DivContentCreateForm form,@ModelAttribute("userid")final String userid){
-		DivContent divElement = form.getDivContent();
+	public ModelAndView storeDivContent(@ModelAttribute("userid")final String userid,
+			@RequestParam("domainId") final String domainId,@RequestParam("divId")final String divId,@RequestParam("divContents") final String divContentString){
+		DivContent divElement = getDivContent(divContentString,domainId,divId);
 		User user = userService.findUser(userid);
-		List<String> userDomainNames = new ArrayList<String>();
-		for(UserDomain userDomain : user.getUserDomains()){
-			userDomainNames.add(userDomain.getDomainName());
-		}
-		if(!userDomainNames.contains(form.getDomainName())){
-			throw new WebgearzException("User is not authorized to change div");
-		}
+		Assert.notNull(user);
+		if(!checkUserOwnsDomain(user,domainId))
+			throw new WebgearzException("User doesnt have access to edit template");
+	
 		divContentService.storeDivContent(divElement);
 		ModelAndView mav = new ModelAndView();
 		mav.setView(new JSONView());
+		mav.getModel().put("msg", "ok");
 		return mav;
 	}
 
+	private boolean checkUserOwnsDomain(User user, String domainId) {
+		for(UserDomain userDomain : user.getUserDomains()){
+			if(userDomain.getId().equals(domainId))
+				return true;
+		}
+		return false;
+		
+	}
 	@Autowired(required=true)
 	public void setDivContentService(DivContentService divContentService) {
 		this.divContentService = divContentService;
@@ -75,6 +83,13 @@ public class DivController {
 	}
 	public UserService getUserService() {
 		return userService;
+	}
+	private DivContent getDivContent(String divContentString,String domainId,String divId){
+		DivContent divContent = new DivContent();
+		divContent.setDivContents(divContentString);
+		divContent.setDomainId(domainId);
+		divContent.setDivId(divId);
+		return divContent;
 	}
 
 }
