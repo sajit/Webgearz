@@ -25,3 +25,7 @@ F
 
 Testing aloha integration
 1. See if edit mode button adds and deletes the editablediv class from the divs
+------
+aloha stuff
+1. How to include a plugin http://getsatisfaction.com/aloha_editor/topics/how_should_i_include_plugins_if_i_build_aloha_myself
+2. image plugin src https://github.com/alohaeditor/Aloha-Plugin-Image/tree/master/src
