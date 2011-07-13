@@ -1,11 +1,11 @@
 2. Spring security integration - automatic login after registration problem
-4. Social integration 
-5. Filing Service
+3. Social integration 
+4. Filing Service
 1. how to create subdomains
 
 http://stackoverflow.com/questions/3170796/help-regarding-setting-up-pseudo-fake-subdomains-on-apache
 1. aloha integration
-3. refactoring services. 1. Remove mongotemplate , repository out of services.. have a genericDao and abstract Dao... 
+
   
 ------
 
