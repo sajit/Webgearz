@@ -5,12 +5,13 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.Assert;
 
+import com.webgearz.tb.daos.UserDao;
 import com.webgearz.tb.domain.models.User;
 import com.webgearz.tb.domain.models.UserDomain;
-import com.webgearz.tb.mongo.repositories.UserRepository;
 import com.webgearz.tb.services.DomainNameService;
 import com.webgearz.tb.services.TemplateService;
 import com.webgearz.tb.services.UserService;
@@ -19,7 +20,7 @@ import com.webgearz.tb.services.UserService;
 public class UserServiceImpl implements UserService{
 	
 	private static final Log log = LogFactory.getLog(UserServiceImpl.class);
-	private UserRepository userRepository;
+	private UserDao userDao;
 	
 	private TemplateService templateService;
 	
@@ -27,30 +28,22 @@ public class UserServiceImpl implements UserService{
 	
 	@Override
 	public User store(User user) {
-		userRepository.save(user);
-		return user;
+		return userDao.save(user);
 	}
 
 	
 	@Override
 	public List<User> getAll() {
-		return userRepository.findAll();
+		return userDao.getAll();
 	}
 	
 	@Override
 	public User findUser(String userId){
 		
-		return userRepository.findOne(userId);
+		return userDao.findById(userId);
 	}
 
-	@Autowired
-	public void setUserRepository(UserRepository userRepository) {
-		this.userRepository = userRepository;
-	}
 
-	public UserRepository getUserRepository() {
-		return userRepository;
-	}
 
 
 
@@ -66,7 +59,7 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public User authenticate(String email, String password) {
 		
-		List<User> allUsers = userRepository.findAll();
+		List<User> allUsers = userDao.getAll();
 		for(User user : allUsers){
 			if(user.getEmail().equals(email)&& user.getPassword().equals(password))
 				return user;
@@ -82,7 +75,7 @@ public class UserServiceImpl implements UserService{
 			Assert.notNull(storedUserDomain);
 			log.debug("Stored User Domain " + storedUserDomain.getId());
 			storedUser.getUserDomains().add(storedUserDomain);
-			userRepository.save(storedUser);
+			userDao.save(storedUser);
 			return true;
 		}
 		return false;
@@ -97,6 +90,17 @@ public class UserServiceImpl implements UserService{
 
 	public DomainNameService getDomainNameService() {
 		return domainNameService;
+	}
+
+
+	@Autowired
+	public void setUserDao(@Qualifier("userDao")UserDao userDao) {
+		this.userDao = userDao;
+	}
+
+
+	public UserDao getUserDao() {
+		return userDao;
 	}
 
 

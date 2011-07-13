@@ -3,22 +3,14 @@ package com.webgearz.tb.domain.models;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.data.annotation.Id;
 import org.springframework.data.document.mongodb.mapping.Document;
 
 @Document
-public class User {
+public class User extends AbstractModel{
 	
 	public static final String EMAIL = "email";
 	public static final String COLLECTION_NAME = "user";
-	@Id
-	private String id;
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
-	}
+	
 	public String getFirstName() {
 		return firstName;
 	}

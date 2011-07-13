@@ -39,6 +39,7 @@ public abstract class AbstractMongoDao<N extends AbstractModel,E>
 		return (N)mongoTemplate.findOne(persistentClass.getSimpleName(), query, persistentClass);
 	}
 	
+	
 	@SuppressWarnings("unchecked")
 	public AbstractMongoDao(){
 		this.persistentClass =  (Class<N>) ((ParameterizedType) this.getClass()

@@ -1,12 +1,14 @@
-1. Spring security integration - automatic login after registration problem
-2. Social integration 
-3. Filing Service
-4. how to create subdomains
+2. Spring security integration - automatic login after registration problem
+4. Social integration 
+5. Filing Service
+1. how to create subdomains
 
 http://stackoverflow.com/questions/3170796/help-regarding-setting-up-pseudo-fake-subdomains-on-apache
-5. jquery integration
-6. refactoring services. 1. Remove mongotemplate , repository out of services.. have a genericDao and abstract Dao... 
-7. do we need an abstract model?
+1. aloha integration
+3. refactoring services. 1. Remove mongotemplate , repository out of services.. have a genericDao and abstract Dao... 
+  
+------
+
 
 ---------
 Use case
@@ -29,3 +31,4 @@ Testing aloha integration
 aloha stuff
 1. How to include a plugin http://getsatisfaction.com/aloha_editor/topics/how_should_i_include_plugins_if_i_build_aloha_myself
 2. image plugin src https://github.com/alohaeditor/Aloha-Plugin-Image/tree/master/src
+3 http://getsatisfaction.com/aloha_editor/topics/inserting_images_pictures
