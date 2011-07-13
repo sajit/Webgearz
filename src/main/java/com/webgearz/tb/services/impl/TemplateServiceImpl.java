@@ -5,62 +5,72 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.webgearz.tb.daos.DivContentDao;
+import com.webgearz.tb.daos.TemplateDao;
 import com.webgearz.tb.domain.models.Template;
 import com.webgearz.tb.exceptions.WebgearzException;
-import com.webgearz.tb.mongo.repositories.DivContentRepository;
-import com.webgearz.tb.mongo.repositories.TemplateRepository;
+
 import com.webgearz.tb.services.TemplateService;
 
 @Service("templateService")
 public class TemplateServiceImpl implements TemplateService{
 
-	private TemplateRepository templateRepository;
-	private DivContentRepository divContentRepository;
+	private TemplateDao templateDao;
+	private DivContentDao divContentDao;
 	@Override
 	public List<String> getDivsOfTemplate(final String templateId) {
-		Template template = templateRepository.findOne(templateId);
+		Template template = templateDao.findById(templateId);
 		if(template==null)
 			throw new WebgearzException("Unknown template");
 		return template.getDivIds();
 	}
 
 
-	@Autowired
-	public void setTemplateRepository(TemplateRepository templateRepository) {
-		this.templateRepository = templateRepository;
-	}
-
-	public TemplateRepository getTemplateRepository() {
-		return templateRepository;
-	}
-
-	@Autowired
-	public void setDivContentRepository(DivContentRepository divContentRepository) {
-		this.divContentRepository = divContentRepository;
-	}
-
-	public DivContentRepository getDivContentRepository() {
-		return divContentRepository;
-	}
-
 
 
 	@Override
 	public List<Template> getAll() {
-		return templateRepository.findAll();
+		return templateDao.getAll();
 	}
 
 	@Override
 	public Template createTemplate(Template template) {
-		templateRepository.save(template);
-		return template;
+		return templateDao.save(template);
 		
 	}
 
 
 	@Override
 	public Template findTemplate(String templateId) {
-		return templateRepository.findOne(templateId);
+		return templateDao.findById(templateId);
+	}
+
+
+
+
+	public TemplateDao getTemplateDao() {
+		return templateDao;
+	}
+
+
+
+	@Autowired
+	public void setTemplateDao(TemplateDao templateDao) {
+		this.templateDao = templateDao;
+	}
+
+
+
+
+	public DivContentDao getDivContentDao() {
+		return divContentDao;
+	}
+
+
+
+	@Autowired
+	public void setDivContentDao(DivContentDao divContentDao) {
+		this.divContentDao = divContentDao;
 	}
 
 	

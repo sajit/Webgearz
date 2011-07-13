@@ -3,23 +3,16 @@ package com.webgearz.tb.domain.models;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.data.annotation.Id;
 import org.springframework.data.document.mongodb.mapping.Document;
 
 @Document
-public class Template {
+public class Template extends AbstractModel{
 
 	
-	@Id
-	private String id;
+	
 	private String templateName;
 	private List<String> divIds = new ArrayList<String>();
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
-	}
+
 	public String getTemplateName() {
 		return templateName;
 	}

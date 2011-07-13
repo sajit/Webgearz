@@ -17,7 +17,7 @@
 	 For example @Controller and @Service. Make sure to set the correct base-package-->
 	<context:component-scan base-package="com.webgearz.tb.services" />
   	
-  	<mongo:repositories base-package="com.webgearz.tb.mongo.repositories" />
+
   
 	<!-- Default bean name is 'mongo' -->
 	<mongo:mongo host="localhost" port="27017"/>

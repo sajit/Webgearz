@@ -1,7 +1,5 @@
 package com.webgearz.tb.services.impl;
 
-import java.util.List;
-
 import javax.annotation.Resource;
 
 import junit.framework.Assert;
@@ -9,7 +7,6 @@ import junit.framework.Assert;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.data.document.mongodb.MongoTemplate;
 import org.springframework.test.context.ContextConfiguration;
@@ -18,8 +15,6 @@ import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 import com.webgearz.tb.daos.UserDomainDao;
 import com.webgearz.tb.domain.models.User;
 import com.webgearz.tb.domain.models.UserDomain;
-import com.webgearz.tb.mongo.repositories.UserDomainRepository;
-import com.webgearz.tb.services.TemplateService;
 import com.webgearz.tb.services.UserDomainService;
 import com.webgearz.tb.services.UserService;
 import com.webgearz.tb.util.DomainObjectUtil;

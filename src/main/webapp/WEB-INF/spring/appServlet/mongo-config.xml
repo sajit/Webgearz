@@ -18,7 +18,7 @@
 	<context:component-scan base-package="com.webgearz.tb" />
   	<import resource="property-context.xml"/>
   
-  	<mongo:repositories base-package="com.webgearz.tb.mongo.repositories" />
+ 
   	
   	<mongo:mapping-converter id="converter" />
   
