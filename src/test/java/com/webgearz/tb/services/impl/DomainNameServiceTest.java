@@ -14,6 +14,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 
 import com.webgearz.tb.domain.models.UserDomain;
+import com.webgearz.tb.exceptions.WebgearzException;
 import com.webgearz.tb.services.DomainNameService;
 
 @ContextConfiguration(locations={
@@ -27,9 +28,10 @@ public class DomainNameServiceTest extends AbstractJUnit4SpringContextTests{
 	
 	@Before
 	public void setup(){
+		if(mongoTemplate.collectionExists(UserDomain.COLLECTION_NAME))
+			mongoTemplate.dropCollection(UserDomain.COLLECTION_NAME);
+		mongoTemplate.createCollection(UserDomain.COLLECTION_NAME);
 		
-		if(!mongoTemplate.collectionExists(UserDomain.COLLECTION_NAME))
-				mongoTemplate.createCollection(UserDomain.COLLECTION_NAME);
 		UserDomain d1 = new UserDomain("domain1","template1");
 		domainNameService.addDomain(d1);
 		
@@ -68,12 +70,11 @@ public class DomainNameServiceTest extends AbstractJUnit4SpringContextTests{
 		
 	}
 	
-	@Test
+	@Test(expected=WebgearzException.class)
 	public void sameDomainNamewontbeAdded(){
-		List<UserDomain> userDomains = mongoTemplate.find(UserDomain.COLLECTION_NAME,new Query(), UserDomain.class);
+		
 		domainNameService.addDomain(new UserDomain("domain1","template2"));
-		List<UserDomain> updatedUserDomains2 = mongoTemplate.find(UserDomain.COLLECTION_NAME,new Query(), UserDomain.class);
-		Assert.assertEquals(userDomains.size(), updatedUserDomains2.size());
+		
 	}
 	
 	

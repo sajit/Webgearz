@@ -6,7 +6,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import com.webgearz.tb.daos.UserDao;
@@ -16,7 +16,7 @@ import com.webgearz.tb.services.DomainNameService;
 import com.webgearz.tb.services.TemplateService;
 import com.webgearz.tb.services.UserService;
 
-@Repository("userService")
+@Service("userService")
 public class UserServiceImpl implements UserService{
 	
 	private static final Log log = LogFactory.getLog(UserServiceImpl.class);

@@ -9,7 +9,7 @@ import org.springframework.data.document.mongodb.mapping.Document;
 public class User extends AbstractModel{
 	
 	public static final String EMAIL = "email";
-	public static final String COLLECTION_NAME = "user";
+	public static final String COLLECTION_NAME = "User";
 	
 	public String getFirstName() {
 		return firstName;

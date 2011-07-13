@@ -15,6 +15,7 @@ import org.springframework.data.document.mongodb.MongoTemplate;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 
+import com.webgearz.tb.daos.UserDomainDao;
 import com.webgearz.tb.domain.models.User;
 import com.webgearz.tb.domain.models.UserDomain;
 import com.webgearz.tb.mongo.repositories.UserDomainRepository;
@@ -30,11 +31,12 @@ public class UserServiceImplTest extends AbstractJUnit4SpringContextTests
 	private static final Log log = LogFactory.getLog(UserServiceImplTest.class);
 	@Resource
 	private UserService userService;
-	
-	@Resource
-	private UserDomainRepository userDomainRepository;
+
 	
 	private final static String USER_COLLECTION = "user";
+	
+	@Resource
+	private UserDomainDao userDomainDao;
 	
 	
 	@Resource
@@ -45,13 +47,13 @@ public class UserServiceImplTest extends AbstractJUnit4SpringContextTests
 	
 	@Before
 	public void setup(){
-		if(mongoTemplate.collectionExists(USER_COLLECTION))
-			mongoTemplate.dropCollection(USER_COLLECTION);
+		if(mongoTemplate.collectionExists(User.COLLECTION_NAME))
+			mongoTemplate.dropCollection(User.COLLECTION_NAME);
 		if(mongoTemplate.collectionExists(UserDomain.COLLECTION_NAME)){
 			mongoTemplate.dropCollection(UserDomain.COLLECTION_NAME);
 		}
 		
-		mongoTemplate.createCollection(USER_COLLECTION);
+		mongoTemplate.createCollection(User.COLLECTION_NAME);
 		mongoTemplate.createCollection(UserDomain.COLLECTION_NAME);
 		
 		
@@ -100,9 +102,9 @@ public class UserServiceImplTest extends AbstractJUnit4SpringContextTests
 		userService.addDomains(storedUser, new UserDomain("domain1","template1"));
 		User retrievedUser = userService.findUser(storedUser.getId());
 		Assert.assertEquals(1, retrievedUser.getUserDomains().size());
-		List<UserDomain> userDomains = userDomainRepository.findAll();
-		Assert.assertEquals(1, userDomains.size());
-		Assert.assertEquals(retrievedUser.getUserDomains().get(0).getId(), userDomains.get(0).getId());
+		UserDomain userDomain = userDomainDao.findDomainByName("domain1");
+		Assert.assertNotNull(userDomain);
+		Assert.assertEquals(retrievedUser.getUserDomains().get(0).getId(), userDomain.getId());
 		
 	}
 	
@@ -112,15 +114,9 @@ public class UserServiceImplTest extends AbstractJUnit4SpringContextTests
 		userService.addDomains(storedUser, new UserDomain("domain1","template1"));
 		User retrievedUser = userService.findUser(storedUser.getId());
 		String domainId = retrievedUser.getUserDomains().get(0).getId();
-		List<UserDomain> userDomains = userDomainRepository.findAll();
 		Assert.assertNotNull(userDomainService.findUserDomainById(domainId));
 	}
 
-//	private Map<String, List<String>> createMap() {
-//		Map<String,List<String>> tmpDomainName = new HashMap<String,String>();
-//		tmpDomainName.put(template.getId(),"domain-quit");
-//		return tmpDomainName;
-//	}
 
 	
 	

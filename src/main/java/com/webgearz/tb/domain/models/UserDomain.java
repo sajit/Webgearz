@@ -2,18 +2,16 @@ package com.webgearz.tb.domain.models;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.data.annotation.Id;
 import org.springframework.data.document.mongodb.mapping.Document;
 
 @Document
-public class UserDomain {
+public class UserDomain extends AbstractModel{
 	
-	public static final String COLLECTION_NAME = "userDomain";
-	public static final String ID = "_id";
+	public static final String COLLECTION_NAME = "UserDomain";
+	public static final String DOMAIN_NAME = "domainName";
 	private String domainName;
 	private String templateId;
-	@Id
-	private String id;
+	
 	
 	private static final Log log = LogFactory.getLog(UserDomain.class);
 	public String getDomainName() {
@@ -56,12 +54,7 @@ public class UserDomain {
 	public String toString(){
 		return "{domainName="+this.domainName+",templateId="+this.templateId+"}";
 	}
-	public void setId(String id) {
-		this.id = id;
-	}
-	public String getId() {
-		return id;
-	}
+	
 	
 
 }
