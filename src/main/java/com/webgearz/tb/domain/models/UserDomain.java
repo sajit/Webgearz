@@ -7,7 +7,6 @@ import org.springframework.data.document.mongodb.mapping.Document;
 @Document
 public class UserDomain extends AbstractModel{
 	
-	public static final String COLLECTION_NAME = "UserDomain";
 	public static final String DOMAIN_NAME = "domainName";
 	private String domainName;
 	private String templateId;

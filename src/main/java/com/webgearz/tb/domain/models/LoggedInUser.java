@@ -19,7 +19,7 @@ public class LoggedInUser implements UserDetails{
 	private boolean accountNonExpired = true;
 	private boolean accountNonLocked = true;
 	private boolean credentialsNonExpired = true;
-	private Collection<GrantedAuthority> grantedAuthorities;
+	private Collection<GrantedAuthority> grantedAuthorities = new ArrayList<GrantedAuthority>();
 	
 	private String userid;
 	
@@ -27,13 +27,11 @@ public class LoggedInUser implements UserDetails{
 		this.userEmail = user.getEmail();
 		this.password = user.getPassword();
 		this.userid = user.getId();
-		this.grantedAuthorities = new ArrayList<GrantedAuthority>();
 		this.grantedAuthorities.add(new GrantedAuthorityImpl(AuthenticatedVoter.IS_AUTHENTICATED_FULLY.toString()));
 	}
 	@Override
 	public Collection<GrantedAuthority> getAuthorities() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.grantedAuthorities;
 	}
 
 	@Override

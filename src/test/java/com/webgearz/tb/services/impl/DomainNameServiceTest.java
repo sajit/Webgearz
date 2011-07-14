@@ -28,9 +28,9 @@ public class DomainNameServiceTest extends AbstractJUnit4SpringContextTests{
 	
 	@Before
 	public void setup(){
-		if(mongoTemplate.collectionExists(UserDomain.COLLECTION_NAME))
-			mongoTemplate.dropCollection(UserDomain.COLLECTION_NAME);
-		mongoTemplate.createCollection(UserDomain.COLLECTION_NAME);
+		if(mongoTemplate.collectionExists(UserDomain.class.getSimpleName()))
+			mongoTemplate.dropCollection(UserDomain.class.getSimpleName());
+		mongoTemplate.createCollection(UserDomain.class.getSimpleName());
 		
 		UserDomain d1 = new UserDomain("domain1","template1");
 		domainNameService.addDomain(d1);
@@ -38,12 +38,7 @@ public class DomainNameServiceTest extends AbstractJUnit4SpringContextTests{
 		
 	}
 	
-	@After
-	public void cleanup(){
-		if(mongoTemplate.collectionExists(UserDomain.COLLECTION_NAME))
-			mongoTemplate.dropCollection(UserDomain.COLLECTION_NAME);
-		
-	}
+	
 	@Test
 	public void returnsTrueIfdomainExists(){
 		
@@ -60,11 +55,11 @@ public class DomainNameServiceTest extends AbstractJUnit4SpringContextTests{
 	
 	@Test
 	public void onlyUniqueDomainsWillBeAdded(){
-		List<UserDomain> userDomains = mongoTemplate.find(UserDomain.COLLECTION_NAME,new Query(), UserDomain.class);
+		List<UserDomain> userDomains = mongoTemplate.find(UserDomain.class.getSimpleName(),new Query(), UserDomain.class);
 		//Assert.assertEquals(1, userDomains.size());
 		domainNameService.addDomain(new UserDomain("domain2","template1"));
 		
-		List<UserDomain> updatedUserDomains = mongoTemplate.find(UserDomain.COLLECTION_NAME,new Query(), UserDomain.class);
+		List<UserDomain> updatedUserDomains = mongoTemplate.find(UserDomain.class.getSimpleName(),new Query(), UserDomain.class);
 		
 		Assert.assertEquals(1+userDomains.size(), updatedUserDomains.size());
 		

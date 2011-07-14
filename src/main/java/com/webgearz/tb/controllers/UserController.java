@@ -37,15 +37,15 @@ public class UserController {
 	 * @param session
 	 * @return
 	 */
-	@RequestMapping(value="/cms/createUser",method=RequestMethod.POST)
+	@RequestMapping(value="/createUser",method=RequestMethod.POST)
 	public ModelAndView createUser(User user,HttpSession session){
 		ModelAndView mav = new ModelAndView();
 		mav.setView(new JSONView());
 		log.debug(user);
 		User storeduser = userService.store(user);
 		mav.getModel().put("user", storeduser);
-		//session.setAttribute("userid", storeduser.getId());
-		//securityService.addAuthenticatedUser(storeduser);
+		session.setAttribute("userid", storeduser.getId());
+		securityService.addAuthenticatedUser(storeduser);
 		mav.getModel().put("msg", "User created");
 		
 		return mav;

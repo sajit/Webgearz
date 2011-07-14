@@ -16,7 +16,7 @@
 	<!-- Scans the classpath for annotated components that will be auto-registered as Spring beans.
 	 For example @Controller and @Service. Make sure to set the correct base-package-->
 	<context:component-scan base-package="com.webgearz.tb.services" />
-  	
+	<context:component-scan base-package="com.webgearz.tb.daos" />  	
 
   
 	<!-- Default bean name is 'mongo' -->

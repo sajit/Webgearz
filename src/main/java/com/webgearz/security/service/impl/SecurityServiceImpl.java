@@ -36,7 +36,7 @@ public class SecurityServiceImpl implements SecurityService{
 	public UserDetails getUserDetailsObject(String userEmail) {
 		Assert.notNull(mongoTemplate);
 		Query query = new Query(Criteria.where(User.EMAIL).is(userEmail));
-		User user = mongoTemplate.findOne(User.COLLECTION_NAME, query, User.class);
+		User user = mongoTemplate.findOne(User.class.getSimpleName(), query, User.class);
 		log.debug("Email --> " + userEmail + ", User --> " + user );
 		if(user==null)
 			return null;
@@ -62,12 +62,16 @@ public class SecurityServiceImpl implements SecurityService{
 		LoggedInUser principal = (LoggedInUser)getUserDetailsObject(user.getEmail());
 		
 		Assert.isTrue(!principal.getGrantedAuthorities().isEmpty());
+		for(GrantedAuthority authority : principal.getGrantedAuthorities()){
+			log.debug("Principal's authority " + authority.getAuthority());
+		}
 		
-		@SuppressWarnings("deprecation")
-		Authentication authentication = new UsernamePasswordAuthenticationToken(principal,principal.getPassword(),principal.getGrantedAuthorities().toArray(new GrantedAuthority[principal.getGrantedAuthorities().size()]));
-		authenticationManager.authenticate(authentication);
+		Authentication authentication = new UsernamePasswordAuthenticationToken(principal,principal.getPassword(),principal.getAuthorities());
+	    Authentication authenticationResult =	authenticationManager.authenticate(authentication);
+	    log.debug(authenticationResult.isAuthenticated());
+	    log.debug(authenticationResult.getAuthorities());
 		log.debug("Authenticated new user using authentication manager " + "Set securityContext");
-		SecurityContextHolder.getContext().setAuthentication(authentication);
+		SecurityContextHolder.getContext().setAuthentication(authenticationResult);
 		
 		
 	}

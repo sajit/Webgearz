@@ -42,14 +42,14 @@ public class UserServiceImplTest extends AbstractJUnit4SpringContextTests
 	
 	@Before
 	public void setup(){
-		if(mongoTemplate.collectionExists(User.COLLECTION_NAME))
-			mongoTemplate.dropCollection(User.COLLECTION_NAME);
-		if(mongoTemplate.collectionExists(UserDomain.COLLECTION_NAME)){
-			mongoTemplate.dropCollection(UserDomain.COLLECTION_NAME);
+		if(mongoTemplate.collectionExists(User.class.getSimpleName()))
+			mongoTemplate.dropCollection(User.class.getSimpleName());
+		if(mongoTemplate.collectionExists(UserDomain.class.getSimpleName())){
+			mongoTemplate.dropCollection(UserDomain.class.getSimpleName());
 		}
 		
-		mongoTemplate.createCollection(User.COLLECTION_NAME);
-		mongoTemplate.createCollection(UserDomain.COLLECTION_NAME);
+		mongoTemplate.createCollection(User.class.getSimpleName());
+		mongoTemplate.createCollection(UserDomain.class.getSimpleName());
 		
 		
 		

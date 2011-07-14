@@ -11,10 +11,10 @@
     <!--sec:global-method-security secured-annotations="enabled"></sec:global-method-security-->
     <sec:http use-expressions="true">
     	<sec:intercept-url pattern="/cms/**" access="isAuthenticated()" />
-		<sec:intercept-url pattern="/login" access="permitAll" filters="none" />
-		<sec:intercept-url pattern="/" access="permitAll" filters="none"/>
+		<sec:intercept-url pattern="/login" access="permitAll" />
+		<sec:intercept-url pattern="/" access="permitAll" />
 		<sec:intercept-url pattern="/resources/**" access="permitAll" filters="none"/>
-		<sec:intercept-url pattern="/cms/createUser" access="permitAll" filters="none"/>
+		<sec:intercept-url pattern="/createUser" access="permitAll" />
 		<sec:intercept-url pattern="/cms/getDivContent/**" access="permitAll" filters="none"/>
 		<sec:intercept-url pattern="/cms/getTemplate/**" access="permitAll" filters="none"/>
 		<!--sec:custom-filter ref="logoutFilter" position="LOGOUT_FILTER" /-->
@@ -24,10 +24,12 @@
 		<sec:logout logout-success-url="/" />
     </sec:http>	
     
-    <!-- Define AccessDesisionManager as UnanimousBased -->
+
+	<!-- Define AccessDesisionManager as UnanimousBased -->
 	<bean id="accessDecisionManager" class="org.springframework.security.access.vote.UnanimousBased">
 		<property name="decisionVoters">
 			<list>
+				<bean class="org.springframework.security.access.vote.RoleVoter" />
 				<bean class="org.springframework.security.access.vote.AuthenticatedVoter" />
 			</list>
 		</property>

@@ -9,7 +9,7 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/thirdpty/jquery.form.js"></script>
 </head>
 <body>
-	<form id="userCreateFormId" action="${pageContext.request.contextPath}/cms/createUser" method="post">
+	<form id="userCreateFormId" action="${pageContext.request.contextPath}/createUser" method="post">
 	 First Name : <input type="text" name="firstName" value="${user.firstName }" /><br/>
 	 Last Name : <input type="text" name="lastName" value="${user.lastName }" /><br/>
 	 Email : <input type="text" name="email" value="${user.email }"/><br/>
