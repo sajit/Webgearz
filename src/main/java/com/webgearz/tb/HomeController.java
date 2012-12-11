@@ -19,7 +19,7 @@ public class HomeController {
 	 */
 	@RequestMapping(value="/", method=RequestMethod.GET)
 	public String home() {
-		logger.info("Welcome home!");
+		logger.info("Welcome home! In 2012");
 		return "home";
 	}
 	
