@@ -3,9 +3,10 @@ package com.webgearz.tb.daos.impl;
 import java.lang.reflect.ParameterizedType;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.document.mongodb.MongoTemplate;
-import org.springframework.data.document.mongodb.query.Criteria;
-import org.springframework.data.document.mongodb.query.Query;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+
 import org.springframework.stereotype.Repository;
 
 import com.webgearz.tb.daos.GenericDao;
@@ -26,17 +27,17 @@ public abstract class AbstractMongoDao<N extends AbstractModel,E>
 	@Override
 	public N save(N model){
 		System.out.println("Inersting into collection " + persistentClass.getSimpleName());
-		mongoTemplate.save(model.getCOLLECTION_NAME(),model);
+		mongoTemplate.save(model,model.getCOLLECTION_NAME());
 		return model;
 		
 	}
 	
 	@Override
 	public N findById(E id){
-		Query query = new Query(Criteria.whereId().is(id));
+		Query query = new Query(Criteria.where("_id").is(id));
 		System.out.println("Retrieving into collection "+ persistentClass.getSimpleName());
 		
-		return (N)mongoTemplate.findOne(persistentClass.getSimpleName(), query, persistentClass);
+		return (N)mongoTemplate.findOne(query, persistentClass);
 	}
 	
 	

@@ -8,8 +8,9 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.data.document.mongodb.MongoTemplate;
-import org.springframework.data.document.mongodb.query.Query;
+
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 
@@ -55,11 +56,11 @@ public class DomainNameServiceTest extends AbstractJUnit4SpringContextTests{
 	
 	@Test
 	public void onlyUniqueDomainsWillBeAdded(){
-		List<UserDomain> userDomains = mongoTemplate.find(UserDomain.class.getSimpleName(),new Query(), UserDomain.class);
+		List<UserDomain> userDomains = mongoTemplate.find(new Query(), UserDomain.class);
 		//Assert.assertEquals(1, userDomains.size());
 		domainNameService.addDomain(new UserDomain("domain2","template1"));
 		
-		List<UserDomain> updatedUserDomains = mongoTemplate.find(UserDomain.class.getSimpleName(),new Query(), UserDomain.class);
+		List<UserDomain> updatedUserDomains = mongoTemplate.find(new Query(), UserDomain.class);
 		
 		Assert.assertEquals(1+userDomains.size(), updatedUserDomains.size());
 		

@@ -3,7 +3,7 @@ package com.webgearz.tb.domain.models;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.data.document.mongodb.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document
 public class Template extends AbstractModel{

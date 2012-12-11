@@ -1,9 +1,7 @@
 package com.webgearz.tb.services.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.document.mongodb.MongoTemplate;
-import org.springframework.data.document.mongodb.query.Criteria;
-import org.springframework.data.document.mongodb.query.Query;
+
 import org.springframework.stereotype.Service;
 
 import com.webgearz.tb.daos.DivContentDao;

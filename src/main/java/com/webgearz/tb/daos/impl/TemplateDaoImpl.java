@@ -2,7 +2,7 @@ package com.webgearz.tb.daos.impl;
 
 import java.util.List;
 
-import org.springframework.data.document.mongodb.query.Query;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 
 import com.webgearz.tb.daos.TemplateDao;
@@ -13,7 +13,7 @@ public class TemplateDaoImpl extends AbstractMongoDao<Template,String> implement
 
 	@Override
 	public List<Template> getAll() {
-		return getMongoTemplate().find(Template.class.getSimpleName(),new Query(),Template.class);
+		return getMongoTemplate().find(new Query(),Template.class);
 	}
 
 }

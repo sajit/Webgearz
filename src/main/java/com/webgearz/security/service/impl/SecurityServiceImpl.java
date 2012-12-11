@@ -6,9 +6,10 @@ import javax.annotation.Resource;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.document.mongodb.MongoTemplate;
-import org.springframework.data.document.mongodb.query.Criteria;
-import org.springframework.data.document.mongodb.query.Query;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+
 import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -36,7 +37,7 @@ public class SecurityServiceImpl implements SecurityService{
 	public UserDetails getUserDetailsObject(String userEmail) {
 		Assert.notNull(mongoTemplate);
 		Query query = new Query(Criteria.where(User.EMAIL).is(userEmail));
-		User user = mongoTemplate.findOne(User.class.getSimpleName(), query, User.class);
+		User user = mongoTemplate.findOne(query, User.class);
 		log.debug("Email --> " + userEmail + ", User --> " + user );
 		if(user==null)
 			return null;
