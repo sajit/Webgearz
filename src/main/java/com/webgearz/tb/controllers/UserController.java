@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.webgearz.security.service.SecurityService;
+
+
 import com.webgearz.tb.client.model.JSONView;
 import com.webgearz.tb.domain.models.User;
+
 import com.webgearz.tb.exceptions.WebgearzException;
 import com.webgearz.tb.services.UserService;
 
@@ -24,7 +26,7 @@ public class UserController {
 
 	private static final Log log = LogFactory.getLog(UserController.class);
 	private UserService userService;
-	private SecurityService securityService;
+	//private SecurityService securityService;
 	@RequestMapping(value="/getRegistePage",method=RequestMethod.GET)
 	public ModelAndView getRegistrationPage(){
 		ModelAndView mav = new ModelAndView("user-details");
@@ -45,7 +47,7 @@ public class UserController {
 		User storeduser = userService.store(user);
 		mav.getModel().put("user", storeduser);
 		session.setAttribute("userid", storeduser.getId());
-		securityService.addAuthenticatedUser(storeduser);
+		//securityService.addAuthenticatedUser(storeduser);
 		mav.getModel().put("msg", "User created");
 		
 		return mav;
@@ -82,15 +84,7 @@ public class UserController {
 		return userService;
 	}
 
-	@Autowired
-	public void setSecurityService(SecurityService securityService) {
-		this.securityService = securityService;
-	}
-
 	
-	public SecurityService getSecurityService() {
-		return securityService;
-	}
 	
 }
 

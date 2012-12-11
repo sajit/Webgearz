@@ -9,7 +9,7 @@ import com.webgearz.tb.daos.DivContentDao;
 import com.webgearz.tb.domain.models.DivContent;
 
 @Repository("divContentDao")
-public class DivContentDaoImpl extends AbstractMongoDao<DivContent,String> implements DivContentDao{
+public class DivContentDaoImpl extends AbstractMongoDao<DivContent> implements DivContentDao{
 
 	@Override
 	public DivContent findDivContent(String domainId, String divId) {

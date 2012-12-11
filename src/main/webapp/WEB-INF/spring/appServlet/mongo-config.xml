@@ -13,24 +13,18 @@
 	<!-- Activates various annotations to be detected in bean classes -->
 	<context:annotation-config />
 	
-	<!-- Scans the classpath for annotated components that will be auto-registered as Spring beans.
-	 For example @Controller and @Service. Make sure to set the correct base-package-->
-	<context:component-scan base-package="com.webgearz.tb" />
-  	<import resource="property-context.xml"/>
-  
- 
-  	
-  	<mongo:mapping-converter id="converter" />
-  
-	<!-- Default bean name is 'mongo' -->
-	<mongo:mongo host="${database.host}" port="27017"/>
-	
-	<!-- Offers convenience methods and automatic mapping between MongoDB JSON documents and your domain classes. -->
-  	<bean id="mongoTemplate" class="org.springframework.data.document.mongodb.MongoTemplate">
-  			<constructor-arg ref="mongo"/>
-		    <constructor-arg name="databaseName" value="${database.name}"/>
-		    <constructor-arg name="defaultCollectionName" value="${database.defaultCollection}"/>
-		    <constructor-arg ref="converter" />
-  	</bean>
 
+  	<import resource="property-context.xml"/>
+  	
+	<!-- Define the MongoTemplate which handles connectivity with MongoDB -->
+  <bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
+    <constructor-arg name="mongo" ref="mongo"/>
+    <constructor-arg name="databaseName" value="${database.name}"/>
+  </bean>
+ 
+  <!-- Factory bean that creates the Mongo instance -->
+  <bean id="mongo" class="org.springframework.data.mongodb.core.MongoFactoryBean">
+    <property name="host" value="${database.host}"/>
+  </bean>
+ 	
 </beans>

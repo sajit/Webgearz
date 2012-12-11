@@ -13,20 +13,19 @@
     	
     	<context:annotation-config />
     	<context:component-scan base-package="com.webgearz.tb.daos"/>
-    
-    <mongo:mapping-converter id="converter" />
-  
-	<!-- Default bean name is 'mongo' -->
-	<mongo:mongo host="localhost" port="27017"/>
-	
-	<!-- Offers convenience methods and automatic mapping between MongoDB JSON documents and your domain classes. -->
-  	<bean id="mongoTemplate" class="org.springframework.data.document.mongodb.MongoTemplate">
-  			<constructor-arg ref="mongo"/>
-		    <constructor-arg name="databaseName" value="mydb1"/>
-		    <constructor-arg name="defaultCollectionName" value="user"/>
-		    <constructor-arg ref="converter" />
-  	</bean>
-  	
+   
+   	<!-- Define the MongoTemplate which handles connectivity with MongoDB -->
+  <bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
+    <constructor-arg name="mongo" ref="mongo"/>
+    <constructor-arg name="databaseName" value="test-db"/>
+  </bean>
+ 
+  <!-- Factory bean that creates the Mongo instance -->
+  <bean id="mongo" class="org.springframework.data.mongodb.core.MongoFactoryBean">
+    <property name="host" value="localhost"/>
+  </bean>
+ 	 
+   
   	<bean id="abstractMongoDao" class="com.webgearz.tb.daos.impl.AbstractMongoDao" abstract="true">
   		<property name="mongoTemplate" ref="mongoTemplate" />
   	</bean>

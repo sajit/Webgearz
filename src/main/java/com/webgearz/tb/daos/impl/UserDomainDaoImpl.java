@@ -9,7 +9,7 @@ import com.webgearz.tb.daos.UserDomainDao;
 import com.webgearz.tb.domain.models.UserDomain;
 
 @Repository("userDomainDao")
-public class UserDomainDaoImpl extends AbstractMongoDao<UserDomain,String> implements UserDomainDao{
+public class UserDomainDaoImpl extends AbstractMongoDao<UserDomain> implements UserDomainDao{
 
 	@Override
 	public UserDomain findDomainByName(String domainName) {

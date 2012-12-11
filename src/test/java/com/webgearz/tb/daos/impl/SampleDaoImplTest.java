@@ -35,6 +35,7 @@ public class SampleDaoImplTest extends AbstractJUnit4SpringContextTests{
 		Sample storedSample = sampleDao.save(model);
 		Assert.assertNotNull(storedSample);
 		Assert.assertNotNull(storedSample.getId());
+		
 		int finalSize = sampleDao.getAll().size();
 		System.out.println("Final size "+ finalSize);
 		Assert.assertEquals(1 + initialSize, finalSize);
@@ -54,7 +55,7 @@ public class SampleDaoImplTest extends AbstractJUnit4SpringContextTests{
 	@BeforeClass
 	public static void dbSetup() throws UnknownHostException, MongoException{
 		Mongo mongo = new Mongo("localhost",27017);
-		mongoTemplate = new MongoTemplate(mongo,"mydb1");
+		mongoTemplate = new MongoTemplate(mongo,"test-db");
 		if(mongoTemplate.collectionExists("Sample")){
 			System.out.println("Dropping Sample  collection before test");
 			mongoTemplate.dropCollection("Sample");

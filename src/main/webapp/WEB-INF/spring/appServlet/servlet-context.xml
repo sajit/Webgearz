@@ -11,7 +11,7 @@
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
-	<context:component-scan base-package="com.webgearz.security" />
+	<context:component-scan base-package="com.webgearz.tb" />
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<annotation-driven />
 

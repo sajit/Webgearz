@@ -13,8 +13,8 @@ import com.webgearz.tb.daos.GenericDao;
 import com.webgearz.tb.domain.models.AbstractModel;
 
 @Repository("abstractMongoDao")
-public abstract class AbstractMongoDao<N extends AbstractModel,E> 
-    implements GenericDao<N,E> {
+public abstract class AbstractMongoDao<N extends AbstractModel> 
+    implements GenericDao<N> {
 	
 	
 	protected MongoTemplate mongoTemplate;
@@ -27,17 +27,19 @@ public abstract class AbstractMongoDao<N extends AbstractModel,E>
 	@Override
 	public N save(N model){
 		System.out.println("Inersting into collection " + persistentClass.getSimpleName());
-		mongoTemplate.save(model,model.getCOLLECTION_NAME());
+		mongoTemplate.insert(model, persistentClass.getSimpleName());
+		//mongoTemplate.save(model,model.getCOLLECTION_NAME());
+
 		return model;
 		
 	}
 	
 	@Override
-	public N findById(E id){
-		Query query = new Query(Criteria.where("_id").is(id));
-		System.out.println("Retrieving into collection "+ persistentClass.getSimpleName());
-		
-		return (N)mongoTemplate.findOne(query, persistentClass);
+	public N findById(String id){
+		//Query query = new Query(Criteria.where("_id").is(id));
+		System.out.println("Retrieving from collection "+ persistentClass.getSimpleName() + " for id " + id);
+		return (N)mongoTemplate.findById(id, persistentClass);
+		//return (N)mongoTemplate.findOne(query, persistentClass);
 	}
 	
 	

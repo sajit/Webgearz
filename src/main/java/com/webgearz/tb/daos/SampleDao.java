@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.webgearz.tb.domain.models.Sample;
 
-public interface SampleDao extends GenericDao<Sample,String>{
+public interface SampleDao extends GenericDao<Sample>{
 	
 	public List<Sample> getAll();
 

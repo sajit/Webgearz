@@ -9,7 +9,7 @@ import com.webgearz.tb.daos.TemplateDao;
 import com.webgearz.tb.domain.models.Template;
 
 @Repository("templateDao")
-public class TemplateDaoImpl extends AbstractMongoDao<Template,String> implements TemplateDao{
+public class TemplateDaoImpl extends AbstractMongoDao<Template> implements TemplateDao{
 
 	@Override
 	public List<Template> getAll() {

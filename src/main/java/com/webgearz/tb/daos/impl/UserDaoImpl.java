@@ -9,7 +9,7 @@ import com.webgearz.tb.daos.UserDao;
 import com.webgearz.tb.domain.models.User;
 
 @Repository("userDao")
-public class UserDaoImpl extends AbstractMongoDao<User,String> implements UserDao{
+public class UserDaoImpl extends AbstractMongoDao<User> implements UserDao{
 
 	@Override
 	public List<User> getAll() {
