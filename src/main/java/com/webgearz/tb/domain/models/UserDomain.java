@@ -11,6 +11,7 @@ public class UserDomain extends AbstractModel{
 	public static final String DOMAIN_NAME = "domainName";
 	private String domainName;
 	private String templateId;
+	private String userId;
 	
 	
 	private static final Log log = LogFactory.getLog(UserDomain.class);
@@ -53,6 +54,12 @@ public class UserDomain extends AbstractModel{
 	@Override
 	public String toString(){
 		return "{domainName="+this.domainName+",templateId="+this.templateId+"}";
+	}
+	public String getUserId() {
+		return userId;
+	}
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 	
 	

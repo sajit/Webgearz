@@ -17,6 +17,7 @@ import com.webgearz.tb.client.model.JSONView;
 import com.webgearz.tb.domain.models.Template;
 import com.webgearz.tb.domain.models.User;
 import com.webgearz.tb.domain.models.UserDomain;
+import com.webgearz.tb.services.DomainNameService;
 import com.webgearz.tb.services.TemplateService;
 import com.webgearz.tb.services.UserDomainService;
 import com.webgearz.tb.services.UserService;
@@ -38,7 +39,9 @@ public class TemplateController {
 	
 	private TemplateFactory templateFactory;
 	
+	
 	private UserDomainService userDomainService;
+	private DomainNameService domainService;
 	@RequestMapping(value="/getTemplates",method=RequestMethod.GET)
 	public ModelAndView getAllTemplates(){
 		ModelAndView mav = new ModelAndView("templates");
@@ -72,13 +75,25 @@ public class TemplateController {
 		
 		Template template = templateService.findTemplate(templateId);
 		UserDomain userDomain = userDomainService.findUserDomainById(domainId);
+		
 		Assert.notNull(template,"Could not find template in database!");
 		Assert.notNull(userDomain,"Could not find user domain");
 		ModelAndView mav = templateFactory.getTemplate(template.getTemplateName(), "index");
 		mav.getModel().put("domainId", userDomain.getId());
-		mav.getModel().put("templateId", templateId);
+		mav.getModel().put("templateId", template.getId());
 		return mav;
 	}
+	public DomainNameService getDomainService() {
+		return domainService;
+	}
+
+
+	@Autowired
+	public void setDomainService(DomainNameService domainService) {
+		this.domainService = domainService;
+	}
+
+
 	@Autowired
 	public void setTemplateService(TemplateService templateService) {
 		this.templateService = templateService;

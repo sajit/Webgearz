@@ -21,6 +21,8 @@ import com.webgearz.tb.domain.models.User;
 import com.webgearz.tb.domain.models.UserDomain;
 import com.webgearz.tb.exceptions.WebgearzException;
 import com.webgearz.tb.services.DivContentService;
+import com.webgearz.tb.services.DomainNameService;
+import com.webgearz.tb.services.UserDomainService;
 import com.webgearz.tb.services.UserService;
 
 @Controller
@@ -29,6 +31,7 @@ public class DivController {
 	
 	private DivContentService divContentService;
 	private UserService userService;
+	private UserDomainService userDomainService;
 	private static final Log LOG = LogFactory.getLog(DivController.class);
 	
 	@RequestMapping(value="/cms/getDivContent",method = RequestMethod.GET)
@@ -62,7 +65,9 @@ public class DivController {
 	}
 
 	private boolean checkUserOwnsDomain(User user, String domainId) {
-		for(UserDomain userDomain : user.getUserDomains()){
+		
+		for(UserDomain userDomain : userDomainService.findDomainsByUser(user.getId())){
+			//UserDomain userDomain = 
 			if(userDomain.getId().equals(domainId))
 				return true;
 		}
@@ -90,6 +95,14 @@ public class DivController {
 		divContent.setDomainId(domainId);
 		divContent.setDivId(divId);
 		return divContent;
+	}
+	public UserDomainService getUserDomainService() {
+		return userDomainService;
+	}
+	
+	@Autowired
+	public void setUserDomainService(UserDomainService userDomainService) {
+		this.userDomainService = userDomainService;
 	}
 
 }

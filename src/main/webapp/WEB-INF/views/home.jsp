@@ -13,7 +13,7 @@
 </h1>
 
 	<a href="${pageContext.request.contextPath}/getRegistePage?_flowId=register-flow">Register</a><br/>
-	<jsp:include page="login.jsp"/>
+	<jsp:include page="loginForm.jsp"/>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/users/userhelper.js"></script>
 </body>
 </html>

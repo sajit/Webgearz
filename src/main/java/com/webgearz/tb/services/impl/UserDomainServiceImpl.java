@@ -1,5 +1,7 @@
 package com.webgearz.tb.services.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -23,6 +25,10 @@ public class UserDomainServiceImpl implements UserDomainService{
 	}
 	public UserDomainDao getUserDomainDao() {
 		return userDomainDao;
+	}
+	@Override
+	public List<UserDomain> findDomainsByUser(String userId) {
+		return userDomainDao.findDomainByUser(userId);
 	}
 	
 

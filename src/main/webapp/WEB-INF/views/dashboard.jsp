@@ -8,8 +8,8 @@
 <title>User's dashboard page</title>
 </head>
 <body>	
-	
-	<c:forEach items="${user.userDomains}" var="userTemplate">
+	<h2>Welcome ${user.firstName}</h2> <br/>
+	<c:forEach items="${userdomains}" var="userTemplate">
 			<a href="${pageContext.request.contextPath}/cms/getTemplate/${userTemplate.templateId}/${userTemplate.id}">${userTemplate.domainName}</a><br/>
 	</c:forEach>	
 	<a href="${pageContext.request.contextPath}/getTemplates">Add templates to your account</a>

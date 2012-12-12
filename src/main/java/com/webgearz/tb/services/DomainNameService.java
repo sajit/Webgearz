@@ -6,5 +6,7 @@ public interface DomainNameService {
 	
 	public boolean userDomainExists(UserDomain userDomain);
 	public UserDomain addDomain(UserDomain userDomain);
+	
+	public UserDomain findDomainByName(String domainName);
 
 }

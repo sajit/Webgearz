@@ -7,14 +7,9 @@ import org.springframework.stereotype.Repository;
 import com.webgearz.tb.daos.SampleDao;
 import com.webgearz.tb.domain.models.Sample;
 
-@Repository("sampleRepository")
+
 public class SampleDaoImpl extends AbstractMongoDao<Sample> implements SampleDao{
 
-	@Override
-	public List<Sample> getAll() {
-	
-		return getMongoTemplate().findAll(Sample.class);
-	}
 
 	
 }

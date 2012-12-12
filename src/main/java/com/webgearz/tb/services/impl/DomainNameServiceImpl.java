@@ -50,4 +50,11 @@ public class DomainNameServiceImpl implements DomainNameService{
 		return userDomainDao;
 	}
 
+
+
+	@Override
+	public UserDomain findDomainByName(String domainName) {
+		return userDomainDao.findDomainByName(domainName);
+	}
+
 }

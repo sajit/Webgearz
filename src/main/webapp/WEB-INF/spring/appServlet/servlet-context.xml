@@ -30,7 +30,15 @@
 	<beans:import resource="controllers.xml" />
 	<beans:import resource="mongo-config.xml" />
 	
-
+	<beans:bean
+		class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+		<beans:property name="exceptionMappings">
+			<beans:props>
+				<beans:prop key="com.webgearz.tb.exceptions.WebgearzException">GenericExceptionPage</beans:prop>
+				<beans:prop key="java.lang.Exception">GenericExceptionPage</beans:prop>
+			</beans:props>
+		</beans:property>
+	</beans:bean>
 	
    
 	

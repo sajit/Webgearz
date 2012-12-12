@@ -6,6 +6,6 @@ import com.webgearz.tb.domain.models.User;
 
 public interface UserDao extends GenericDao<User>{
 	
-	public List<User> getAll();
+	void addUserDomain(User user,String domainName);
 
 }

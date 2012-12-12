@@ -22,9 +22,8 @@
     <constructor-arg name="databaseName" value="${database.name}"/>
   </bean>
  
-  <!-- Factory bean that creates the Mongo instance -->
-  <bean id="mongo" class="org.springframework.data.mongodb.core.MongoFactoryBean">
-    <property name="host" value="${database.host}"/>
-  </bean>
- 	
+  
+  <mongo:mongo host="${database.host}" port="${database.port}" />
+
+ 
 </beans>

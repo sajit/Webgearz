@@ -42,18 +42,19 @@ public class User extends AbstractModel{
 	private String lastName;
 	private String email;
 	private String password;
-	private List<UserDomain> userDomains = new ArrayList<UserDomain>();
+	//private List<String> userDomains = new ArrayList<String>();
+
 	
 	@Override
 	public String toString(){
 		return "{name : " + firstName + lastName +",email: "+email+",password"+password+" }";
 	}
-	public void setUserDomains(List<UserDomain> userDomains) {
-		this.userDomains = userDomains;
-	}
-	public List<UserDomain> getUserDomains() {
-		return userDomains;
-	}
+//	public void setUserDomains(List<String> userDomains) {
+//		this.userDomains = userDomains;
+//	}
+//	public List<String> getUserDomains() {
+//		return userDomains;
+//	}
 	
 
 

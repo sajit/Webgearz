@@ -1,5 +1,6 @@
 package com.webgearz.tb.services.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -70,12 +71,11 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public boolean addDomains(User storedUser, UserDomain userdomain) {
 		if(!domainNameService.userDomainExists(userdomain)){
-			
+			userdomain.setUserId(storedUser.getId());
 			UserDomain storedUserDomain = domainNameService.addDomain(userdomain);
 			Assert.notNull(storedUserDomain);
 			log.debug("Stored User Domain " + storedUserDomain.getId());
-			storedUser.getUserDomains().add(storedUserDomain);
-			userDao.save(storedUser);
+			//userDao.addUserDomain(storedUser, storedUserDomain.getDomainName());
 			return true;
 		}
 		return false;

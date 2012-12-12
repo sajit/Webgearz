@@ -27,7 +27,8 @@
  	 
    
   	<bean id="abstractMongoDao" class="com.webgearz.tb.daos.impl.AbstractMongoDao" abstract="true">
-  		<property name="mongoTemplate" ref="mongoTemplate" />
+  		<property name="mongoOperation" ref="mongoTemplate" />
   	</bean>
   	<bean id="sampleDao" class="com.webgearz.tb.daos.impl.SampleDaoImpl" parent="abstractMongoDao"></bean>
+  	<bean id="userDao" class="com.webgearz.tb.daos.impl.UserDaoImpl" parent="abstractMongoDao"></bean>
 </beans>

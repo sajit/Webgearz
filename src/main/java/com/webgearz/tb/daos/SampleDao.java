@@ -6,6 +6,6 @@ import com.webgearz.tb.domain.models.Sample;
 
 public interface SampleDao extends GenericDao<Sample>{
 	
-	public List<Sample> getAll();
+	
 
 }

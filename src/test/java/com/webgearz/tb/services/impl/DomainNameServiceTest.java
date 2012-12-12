@@ -56,11 +56,11 @@ public class DomainNameServiceTest extends AbstractJUnit4SpringContextTests{
 	
 	@Test
 	public void onlyUniqueDomainsWillBeAdded(){
-		List<UserDomain> userDomains = mongoTemplate.find(new Query(), UserDomain.class);
+		List<UserDomain> userDomains = mongoTemplate.find(new Query(), UserDomain.class,UserDomain.class.getSimpleName());
 		//Assert.assertEquals(1, userDomains.size());
 		domainNameService.addDomain(new UserDomain("domain2","template1"));
 		
-		List<UserDomain> updatedUserDomains = mongoTemplate.find(new Query(), UserDomain.class);
+		List<UserDomain> updatedUserDomains = mongoTemplate.find(new Query(), UserDomain.class,UserDomain.class.getSimpleName());
 		
 		Assert.assertEquals(1+userDomains.size(), updatedUserDomains.size());
 		
