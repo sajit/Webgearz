@@ -3,3 +3,5 @@ To start the application
 2. Create a folder in userhome directory called wgprops. Copy the common.properties file into that folder.
 
 3. Start tc Server
+
+http://stackoverflow.com/questions/6210757/java-lang-classnotfoundexception-org-springframework-web-context-contextloaderl
