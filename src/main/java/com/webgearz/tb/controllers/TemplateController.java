@@ -62,6 +62,7 @@ public class TemplateController {
 		boolean result = userService.addDomains(user, new UserDomain(domainName,templateid));
 		
 		mav.getModel().put("result", result);
+		mav.getModel().put("userid", user.getId());
 		return mav;
 	}
 	/**

@@ -7,6 +7,6 @@
 <title>Sample-1-Template</title>
 </head>
 <body>
-
+	Nothing to edit! Not added and editable divs
 </body>
 </html>

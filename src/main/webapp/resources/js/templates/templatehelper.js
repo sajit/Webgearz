@@ -22,9 +22,9 @@ $(document).ready(function() {
 			  type: 'POST',
 			  url: url,
 			  data: {'domainName':dataParam.domainName,'templateid':dataParam.templateid},
-			  success: function(){
-				  alert("In successallbcalk");
-				  top.location = '/tb/cms/user_dashboard';
+			  success: function(data){
+				  alert("Added the template to your account");
+				  top.location = '/tb/cms/user_dashboard/'+data.userid;
 			  },
 			  dataType: 'json'
 			});

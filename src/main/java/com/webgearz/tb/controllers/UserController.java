@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -60,7 +61,7 @@ public class UserController{
 		session.setAttribute("userid", storeduser.getId());
 		//securityService.addAuthenticatedUser(storeduser);
 		mav.getModel().put("msg", "User created");
-		
+		mav.getModel().put("userid",storeduser.getId());
 		return mav;
 	}
 	
@@ -73,8 +74,8 @@ public class UserController{
 	}
 	
 	
-	@RequestMapping(value="/cms/user_dashboard",method=RequestMethod.GET)
-	public ModelAndView getUserDashboard(@ModelAttribute("userid")String userid){
+	@RequestMapping(value="/cms/user_dashboard/{userid}",method=RequestMethod.GET)
+	public ModelAndView getUserDashboard(@PathVariable("userid")String userid){
 		ModelAndView mav = new ModelAndView("dashboard");
 		User user = userService.findUser(userid);
 		if(user==null)
@@ -92,11 +93,8 @@ public class UserController{
 		User user = userService.authenticate(loginform.getEmail(), loginform.getPassword());
 		if(user!=null){
 		session.setAttribute("userid", user.getId());
-		//ModelAndView mav = new ModelAndView("dashboard");
-		//mav.getModel().put("user", user);
 		
-		//return mav;
-		return "redirect:/cms/user_dashboard";
+		return "redirect:/cms/user_dashboard/"+user.getId();
 		}
 		else{
 			System.out.println("Throwing new exception");
