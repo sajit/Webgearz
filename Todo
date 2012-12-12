@@ -1,4 +1,10 @@
+Refactoring
+1. We dont need both domainNameService and userDomainService - duplicate functionality
+2. Some of the searching code such as authentication should be improved
+3. data model should be revisited 
 
+
+--
 2. Social integration 
 3. Filing Service
 1. how to create subdomains
